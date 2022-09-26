@@ -1,13 +1,14 @@
-import './App.css';
+import "./App.css";
+
+// TODO Доавбить ESLint
+// TODO Добавить форматирование ESLint в .lintstagedrc.json
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Первое приложение на React
-        </p>
+        <p>Первое приложение на React</p>
         <a
           className="App-link"
           href="https://reactjs.org"
