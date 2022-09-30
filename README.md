@@ -1,6 +1,6 @@
 # admin-panel
-App on React
 
+App on React
 
 # Getting Started with Create React App
 
