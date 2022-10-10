@@ -1,46 +1,53 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "commonjs": true,
-    "node": true
-  },
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:css/recommended",
-    "eslint:recommended",
-    "google",
-    "prettier"
-  ],
-  "overrides": [],
-  "parserOptions": {
-    "parser": "@babel/eslint-parser",
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "modules": true,
-      "experimentalObjectRestSpread": true
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "commonjs": true,
+        "node": true
     },
-    "requireConfigFile": false,
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "plugin:css/recommended",
+        "eslint:recommended",
+        "google",
+        "prettier"
+    ],
+    "overrides": [],
+    "parserOptions": {
+        "parser": "@babel/eslint-parser",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        },
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
+    },
+    "plugins": ["react", "prettier", "html", "css"],
+    "rules": {
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": 0,
+        "require-jsdoc": 0,
+        "prettier/prettier": [
+            "error",
+            {
+                "trailingComma": "es5",
+                "tabWidth": 4,
+                "useTabs": false,
+                "singleQuote": true,
+                "jsxSingleQuote": true
+            }
+        ],
+        "no-console": 1
+    },
+    "settings": {
+        "react": {
+            "eslint": "recommended",
+            "version": "detect"
+        }
     }
-  },
-  "plugins": ["react", "prettier", "html", "css"],
-  "rules": {
-    "quotes": ["error", "single"],
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": 0,
-    "require-jsdoc": 0,
-    "prettier/prettier": "error",
-    "no-console": 1
-  },
-  "settings": {
-    "react": {
-      "eslint": "recommended",
-      "version": "detect"
-    }
-  }
 }
