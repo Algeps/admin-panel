@@ -1,22 +1,9 @@
-import './App.css';
+import './css/reset.css';
+import './css/uikit.css';
+import './css/admin-panel.css';
 
-function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>Первое приложение на React</p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import PageAdmin from './modules/PageAdmin';
+
+const App = () => <PageAdmin />;
 
 export default App;
