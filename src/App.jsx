@@ -1,8 +1,6 @@
-import './css/reset.css';
-import './css/uikit.css';
-import './css/admin-panel.css';
+import PageAdmin from './components/modules/PageAdmin';
 
-import PageAdmin from './modules/PageAdmin';
+import './reset.css';
 
 const App = () => <PageAdmin />;
 
