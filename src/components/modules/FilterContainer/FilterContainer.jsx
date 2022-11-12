@@ -5,7 +5,6 @@ export const FilterContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleShowFilterButtonClick = () => {
-    // console.log('вызов');
     setIsOpen((current) => !current);
   };
 

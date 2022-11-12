@@ -1,0 +1,62 @@
+._ {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.extended {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: var(--color-light-grey);
+  flex-wrap: wrap;
+}
+
+.group {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.group_main {
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.group_extended {
+  position: relative;
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+/*Стили для фильтров*/
+.searchbar {
+  width: 20rem;
+}
+.data_registration {
+  width: 8.875rem;
+}
+
+.data_registration-from input {
+  padding-left: 1.1875rem !important;
+}
+
+.order_amount {
+  width: 7.875rem;
+}
+
+.order_status {
+  width: 12rem;
+}

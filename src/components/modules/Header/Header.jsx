@@ -1,8 +1,9 @@
 import { Button, ButtonColorTypes, ButtonSizeTypes } from '../../shared';
+import styles from './Header.module.css';
 
 const Header = () => (
-  <header className='page-header'>
-    <span className='page-header__text'>Список заказов</span>
+  <header className={styles._}>
+    <span className={styles.text}>Список заказов</span>
     <Button
       text='Светлая тема'
       iconName='sun'

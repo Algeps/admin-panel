@@ -1,0 +1,12 @@
+._ input {
+  padding-left: 2rem;
+}
+
+.icon {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  stroke: var(--color-blue);
+}

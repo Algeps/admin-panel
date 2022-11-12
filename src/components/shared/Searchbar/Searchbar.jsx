@@ -1,22 +1,13 @@
 import classnames from 'classnames';
 import { Icon } from '../Icon/Icon';
+import { Input } from '../Input/Input';
+import styles from './Searchbar.module.css';
 
-export const Searchbar = ({ iconNameBefore, textBefore }) => (
-  <div>
-    <TextBefore />
-    <Icon
-      iconName={iconNameBefore}
-      className={classnames(
-        'input__button-icon',
-        'input__button-icon_position_beginning',
-        'searchbar__searchbar-icon'
-      )}
-    />
-  </div>
-);
-
-const TextBefore = (textBefore) => (
-  <span className='input__button-icon input__button-icon_position_beginning searchbar__searchbar-text'>
-    {textBefore}
-  </span>
-);
+export const Searchbar = ({ iconNameBefore, className, ...props }) => {
+  const blockClass = classnames(styles._, className);
+  return (
+    <Input type='text' className={blockClass} {...props}>
+      <Icon iconName={iconNameBefore} className={classnames(styles.icon)} />
+    </Input>
+  );
+};
