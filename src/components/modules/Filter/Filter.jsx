@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Input, Button, ButtonColorTypes, Searchbar } from '../../shared';
+import { Input, Button, Color, Searchbar, Icon } from '../../shared';
 import styles from './Filter.module.css';
 
 const noop = () => {};
@@ -14,26 +14,20 @@ export const Filter = ({ isOpen, onShowFilterButtonClick = noop }) => (
           placeholder='Номер заказа или ФИО'
         />
         <Button
-          buttonColorTypes={
-            isOpen
-              ? ButtonColorTypes.colorBlue
-              : ButtonColorTypes.colorClearBlue
-          }
+          color={isOpen ? Color.colorBlue : Color.colorClearBlue}
           onClick={onShowFilterButtonClick}
-          text='Фильтры'
-          iconName='filter'
-        />
-        <Button
-          buttonColorTypes={ButtonColorTypes.colorClearBlue}
-          text='Сбросить фильтры'
-        />
+        >
+          <Icon iconName='filter' />
+          <span>Фильтры</span>
+        </Button>
+        <Button color={Color.colorClearBlue}>
+          <span>Сбросить фильтры</span>
+        </Button>
       </div>
-      <Button
-        text='Загрузка'
-        iconName='refresh'
-        buttonColorTypes={ButtonColorTypes.colorClearBlue}
-        className='button_active_load'
-      />
+      <Button color={Color.colorClearBlue}>
+        <Icon iconName='refresh' />
+        <span>Загрузка</span>
+      </Button>
     </div>
     {isOpen && (
       <div className={styles.extended}>
@@ -76,10 +70,9 @@ export const Filter = ({ isOpen, onShowFilterButtonClick = noop }) => (
             textPrefix='до'
           />
         </div>
-        <Button
-          buttonColorTypes={ButtonColorTypes.colorClearBlue}
-          text='Применить'
-        />
+        <Button color={Color.colorClearBlue}>
+          <span>Применить</span>
+        </Button>
       </div>
     )}
   </div>

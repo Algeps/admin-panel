@@ -1,46 +1,36 @@
-import classnames from 'classnames';
-import { Icon } from '../Icon/Icon';
+import classNames from 'classnames';
 import styles from './Button.module.css';
 
-export const ButtonSizeTypes = {
-  sizeBig: 'size_big',
-  sizeSlim: 'size_slim',
+export const Size = {
+  sizeBig: 'sizeBig',
+  sizeSlim: 'sizeSlim',
 };
 
-export const ButtonColorTypes = {
-  colorBlue: 'color_blue',
-  colorRed: 'color_red',
-  colorClearBlue: 'color_clear-blue',
-  colorClearBlack: 'color_clear-black',
+export const Color = {
+  colorBlue: 'colorBlue',
+  colorRed: 'colorRed',
+  colorClearBlue: 'colorClearBlue',
+  colorClearBlack: 'colorClearBlack',
 };
 
 export const Button = ({
-  buttonSizeType = ButtonSizeTypes.sizeBig,
-  buttonColorTypes = ButtonColorTypes.colorBlue,
-  text = '',
-  iconName = '',
-  className,
-  inInput = false,
+  size = Size.sizeBig,
+  color = Color.colorBlue,
+  children,
   ...props
 }) => {
-  const blockClass = classnames(styles._, {
-    [styles.size_big]: buttonSizeType === ButtonSizeTypes.sizeBig,
-    [styles.size_slim]: buttonSizeType === ButtonSizeTypes.sizeSlim,
+  const blockClass = classNames(styles._, {
+    [styles.sizeBig]: size === Size.sizeBig,
+    [styles.sizeSlim]: size === Size.sizeSlim,
 
-    [styles.color_blue]: buttonColorTypes === ButtonColorTypes.colorBlue,
-    [styles.color_red]: buttonColorTypes === ButtonColorTypes.colorRed,
-    [styles['color_clear-blue']]:
-      buttonColorTypes === ButtonColorTypes.colorClearBlue,
-    [styles['color_clear-black']]:
-      buttonColorTypes === ButtonColorTypes.colorClearBlack,
-    [className]: className,
+    [styles.colorBlue]: color === Color.colorBlue,
+    [styles.colorRed]: color === Color.colorRed,
+    [styles.colorClearBlue]: color === Color.colorClearBlue,
+    [styles.colorClearBlack]: color === Color.colorClearBlack,
   });
   return (
     <button className={blockClass} {...props}>
-      {iconName && (
-        <Icon className={classnames(styles.icon)} iconName={iconName} />
-      )}
-      {text && <span className={classnames(styles.text)}>{text}</span>}
+      {children}
     </button>
   );
 };

@@ -13,52 +13,52 @@
   background-color: var(--color-hover);
 }
 
-.size_big {
+.sizeBig {
   padding: 0.5rem 1rem 0.5rem 1rem;
   gap: 0.5rem;
 }
 
-.size_slim {
+.sizeSlim {
   height: 1.5rem;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   gap: 0.25rem;
 }
 
-.color_blue {
+.colorBlue {
   background-color: var(--color-blue);
   color: var(--color-white);
   stroke: var(--color-white);
   fill: var(--color-white);
 }
 
-.color_red {
+.colorRed {
   background-color: var(--color-red);
   color: var(--color-white);
   stroke: var(--color-white);
   fill: var(--color-white);
 }
 
-.color_clear-blue {
+.colorClearBlue {
   background: transparent;
   color: var(--color-blue);
   stroke: var(--color-blue);
   fill: var(--color-blue);
 }
 
-.color_clear-black {
+.colorClearBlack {
   background: transparent;
   color: var(--color-black);
   stroke: var(--color-black);
   fill: var(--color-black);
 }
 
-.by_width {
+.byWidth {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.size_slim.icon_only {
+.sizeSlim.iconOnly {
   padding: 0.25rem;
 }
 
@@ -66,7 +66,7 @@
   height: 1rem;
 }
 
-.icon_only {
+.iconOnly {
   padding: 0.5rem;
 }
 

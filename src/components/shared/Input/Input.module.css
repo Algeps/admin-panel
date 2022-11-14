@@ -16,7 +16,7 @@
   height: 2rem;
 }
 
-.input-field {
+.inputField {
   appearance: none;
   display: flex;
   height: 100%;
@@ -27,31 +27,31 @@
   box-sizing: border-box;
 }
 
-.inside-area {
+.insideArea {
   position: absolute;
   background-color: transparent;
   border: none;
   outline: 0;
 }
 
-.clear-button {
+.clearButton {
   height: 1.5rem;
   width: 1.5rem;
   padding: 0.25rem;
 }
 
 /*Стили Input*/
-.style_primary .input-field {
+.stylePrimary .inputField {
   border-color: var(--color-blue);
   background-color: var(--color-white);
 }
 
-.style_incorrect .input-field {
+.styleIncorrect .inputField {
   border-color: var(--color-red);
   background-color: var(--color-white);
 }
 
-.style_disabled .input-field {
+.styleDisabled .inputField {
   border-color: var(--color-blue);
   background: var(--color-day-light-blue);
   cursor: not-allowed;
@@ -59,33 +59,33 @@
 
 /*Настройка Input(_)*/
 
-.input-field:focus {
+.inputField:focus {
   outline: 0;
 }
 
-.input-field::placeholder {
+.inputField::placeholder {
   color: var(--color-day-light-blue);
 }
 
 /*Настройка inside-area*/
 
-.inside-area_prefix {
+.insideAreaPrefix {
   left: 0.5rem;
   bottom: 0.5rem;
 }
 
-.inside-area_postfix {
+.insideAreaPostfix {
   right: 0.25rem;
   bottom: 0.25rem;
 }
 
-.inside-area_prefix ~ .input-field {
+.insideAreaPrefix ~ .inputField {
   padding-left: 1.75rem;
 }
 
 /*Настройка icon target*/
 
-.icon_target-button {
+.iconTargetButton {
   height: 1rem;
   bottom: 0.5rem;
   stroke: var(--color-day-light-blue);
@@ -93,7 +93,7 @@
   cursor: pointer;
 }
 
-.icon_target-disabled {
+.iconTargetDisabled {
   height: 1rem;
   bottom: 0.5rem;
   fill: var(--color-black);
@@ -101,7 +101,7 @@
   cursor: not-allowed;
 }
 
-.icon_target-clear {
+.iconTargetClear {
   height: 1rem;
   stroke: var(--color-day-light-blue);
   fill: var(--color-day-light-blue);

@@ -4,9 +4,9 @@ import { Icon } from '../Icon/Icon';
 import styles from './Input.module.css';
 
 export const InputTypes = {
-  primary: 'style_primary',
-  incorrect: 'style_incorrect',
-  disabled: 'style_disabled',
+  primary: 'stylePrimary',
+  incorrect: 'styleIncorrect',
+  disabled: 'styleDisabled',
 };
 
 export const Input = ({
@@ -20,38 +20,38 @@ export const Input = ({
 }) => {
   const isDisabled = inputType === InputTypes.disabled;
   const blockClass = classNames(styles._, {
-    [styles.style_primary]: inputType === InputTypes.primary,
-    [styles.style_incorrect]: inputType === InputTypes.incorrect,
-    [styles.style_disabled]: inputType === InputTypes.disabled,
+    [styles.stylePrimary]: inputType === InputTypes.primary,
+    [styles.styleIncorrect]: inputType === InputTypes.incorrect,
+    [styles.styleDisabled]: inputType === InputTypes.disabled,
 
     [className]: className,
   });
   const labelClass = classNames(styles.label);
   const areaClass = classNames(styles.area);
-  const inputClass = classNames(styles['input-field']);
+  const inputClass = classNames(styles.inputField);
   const textPrefixClass = classNames(
-    styles['inside-area'],
-    styles['inside-area_prefix']
+    styles.insideArea,
+    styles.insideAreaPrefix
   );
 
   const clearButtonClass = classNames(
-    styles['inside-area'],
-    styles['inside-area_postfix'],
-    styles['clear-button']
+    styles.insideArea,
+    styles.insideAreaPostfix,
+    styles.clearButton
   );
-  const clearIconClass = classNames(styles['icon_target-clear']);
+  const clearIconClass = classNames(styles.iconTargetClear);
 
   const isButton = props.type === 'button';
   const iconButtonClass = classNames(
-    styles['inside-area'],
-    styles['inside-area_postfix'],
-    styles['icon_target-button']
+    styles.insideArea,
+    styles.insideAreaPostfix,
+    styles.iconTargetButton
   );
 
   const lockIconClass = classNames(
-    styles['inside-area'],
-    styles['inside-area_postfix'],
-    styles['icon_target-disabled']
+    styles.insideArea,
+    styles.insideAreaPostfix,
+    styles.iconTargetDisabled
   );
 
   const [value, setValue] = useState(initValue);
