@@ -1,76 +1,101 @@
 import classNames from 'classnames';
-import { Input, Button, Color, Searchbar, Icon } from '../../shared';
+import { Input, Button, ButtonColorTypes, Searchbar, Icon } from '../../shared';
 import styles from './Filter.module.css';
 
 const noop = () => {};
 
-export const Filter = ({ isOpen, onShowFilterButtonClick = noop }) => (
+export const Filter = ({
+  isOpen,
+  onShowFilterButtonClick = noop,
+  mainSearch,
+  onMainSearchChange = noop,
+  startDate,
+  onStartDateChange = noop,
+  endDate,
+  onEndDateChange = noop,
+  startAmount,
+  onStartAmountChange = noop,
+  endAmount,
+  onEndAmountChange = noop,
+}) => (
   <div className={styles._}>
     <div className={styles.main}>
-      <div className={classNames(styles.group, styles.group_main)}>
+      <div className={classNames(styles.group, styles.groupMain)}>
         <Searchbar
           className={styles.searchbar}
           iconNameBefore='search'
           placeholder='Номер заказа или ФИО'
+          value={mainSearch}
+          onChange={onMainSearchChange}
         />
         <Button
-          color={isOpen ? Color.colorBlue : Color.colorClearBlue}
+          color={
+            isOpen
+              ? ButtonColorTypes.colorBlue
+              : ButtonColorTypes.colorClearBlue
+          }
           onClick={onShowFilterButtonClick}
         >
           <Icon iconName='filter' />
           <span>Фильтры</span>
         </Button>
-        <Button color={Color.colorClearBlue}>
+        <Button color={ButtonColorTypes.colorClearBlue}>
           <span>Сбросить фильтры</span>
         </Button>
       </div>
-      <Button color={Color.colorClearBlue}>
+      <Button color={ButtonColorTypes.colorClearBlue}>
         <Icon iconName='refresh' />
         <span>Загрузка</span>
       </Button>
     </div>
     {isOpen && (
       <div className={styles.extended}>
-        <div className={classNames(styles.group, styles.group_extended)}>
+        <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
             className={classNames(
-              styles.data_registration,
-              styles['data_registration-from']
+              styles.dataRegistration,
+              styles.dataRegistrationFrom
             )}
             labelText='Дата оформления'
             placeholder='dd.mm.yyyy'
-            textPrefix='c'
-            initValue='20.01.2021'
+            prefix='с'
+            value={startDate}
+            onChange={onStartDateChange}
           />
           <Input
-            className={styles.data_registration}
+            className={styles.dataRegistration}
             placeholder='dd.mm.yyyy'
-            textPrefix='по'
+            prefix='по'
+            value={endDate}
+            onChange={onEndDateChange}
           />
         </div>
-        <div className={classNames(styles.group, styles.group_extended)}>
+        <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
             type='button'
-            className={styles.order_status}
+            className={styles.orderStatus}
             labelText='Статус заказа'
-            initValue='Любой'
+            postfix={<Icon iconName={'vArrow'} />}
           />
         </div>
-        <div className={classNames(styles.group, styles.group_extended)}>
+        <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
             labelText='Сумма заказа'
-            className={styles.order_amount}
+            className={styles.orderAmount}
             placeholder='₽'
-            textPrefix='от'
-            initValue='5000'
+            prefix='от'
+            value={startAmount}
+            onChange={onStartAmountChange}
           />
           <Input
-            className={styles.order_amount}
+            className={styles.orderAmount}
             placeholder='₽'
-            textPrefix='до'
+            prefix='до'
+            value={endAmount}
+            onChange={onEndAmountChange}
           />
         </div>
-        <Button color={Color.colorClearBlue}>
+        <Button color={ButtonColorTypes.colorClearBlue}>
           <span>Применить</span>
         </Button>
       </div>

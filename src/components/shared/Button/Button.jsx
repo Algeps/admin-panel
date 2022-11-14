@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import styles from './Button.module.css';
 
-export const Size = {
+export const ButtonSizeTypes = {
   sizeBig: 'sizeBig',
   sizeSlim: 'sizeSlim',
 };
 
-export const Color = {
+export const ButtonColorTypes = {
   colorBlue: 'colorBlue',
   colorRed: 'colorRed',
   colorClearBlue: 'colorClearBlue',
@@ -14,19 +14,19 @@ export const Color = {
 };
 
 export const Button = ({
-  size = Size.sizeBig,
-  color = Color.colorBlue,
+  size = ButtonSizeTypes.sizeBig,
+  color = ButtonColorTypes.colorBlue,
   children,
   ...props
 }) => {
   const blockClass = classNames(styles._, {
-    [styles.sizeBig]: size === Size.sizeBig,
-    [styles.sizeSlim]: size === Size.sizeSlim,
+    [styles.sizeBig]: size === ButtonSizeTypes.sizeBig,
+    [styles.sizeSlim]: size === ButtonSizeTypes.sizeSlim,
 
-    [styles.colorBlue]: color === Color.colorBlue,
-    [styles.colorRed]: color === Color.colorRed,
-    [styles.colorClearBlue]: color === Color.colorClearBlue,
-    [styles.colorClearBlack]: color === Color.colorClearBlack,
+    [styles.colorBlue]: color === ButtonColorTypes.colorBlue,
+    [styles.colorRed]: color === ButtonColorTypes.colorRed,
+    [styles.colorClearBlue]: color === ButtonColorTypes.colorClearBlue,
+    [styles.colorClearBlack]: color === ButtonColorTypes.colorClearBlack,
   });
   return (
     <button className={blockClass} {...props}>

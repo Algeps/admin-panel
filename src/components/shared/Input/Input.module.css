@@ -28,6 +28,7 @@
 }
 
 .insideArea {
+  display: flex;
   position: absolute;
   background-color: transparent;
   border: none;

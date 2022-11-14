@@ -25,7 +25,7 @@ export const icons = {
   refresh: IcoRefresh,
   search: IcoSearch,
   sun: IcoSun,
-  v_arrow: IcoVArrow,
+  vArrow: IcoVArrow,
   x_large: IcoXLarge,
-  x_medium: IcoXMedium,
+  xMedium: IcoXMedium,
 };

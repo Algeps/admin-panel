@@ -29,12 +29,12 @@
   flex-wrap: wrap;
 }
 
-.group_main {
+.groupMain {
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.group_extended {
+.groupExtended {
   position: relative;
   display: flex;
   gap: 0.25rem;
@@ -45,18 +45,19 @@
 .searchbar {
   width: 20rem;
 }
-.data_registration {
+
+.dataRegistration {
   width: 8.875rem;
 }
 
-.data_registration-from input {
+.dataRegistrationFrom input {
   padding-left: 1.1875rem !important;
 }
 
-.order_amount {
+.orderAmount {
   width: 7.875rem;
 }
 
-.order_status {
+.orderStatus {
   width: 12rem;
 }

@@ -6,8 +6,13 @@ import styles from './Searchbar.module.css';
 export const Searchbar = ({ iconNameBefore, className, ...props }) => {
   const blockClass = classNames(styles._, className);
   return (
-    <Input type='text' className={blockClass} {...props}>
-      <Icon iconName={iconNameBefore} className={classNames(styles.icon)} />
-    </Input>
+    <Input
+      type='text'
+      className={blockClass}
+      prefix={
+        <Icon iconName={iconNameBefore} className={classNames(styles.icon)} />
+      }
+      {...props}
+    />
   );
 };

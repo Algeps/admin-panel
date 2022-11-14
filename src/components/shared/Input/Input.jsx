@@ -1,7 +1,12 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { Icon } from '../Icon/Icon';
 import styles from './Input.module.css';
+
+const noop = () => {};
+
+const Component = ({ children, className }) => {
+  return <div className={className}>{children}</div>;
+};
 
 export const InputTypes = {
   primary: 'stylePrimary',
@@ -10,14 +15,17 @@ export const InputTypes = {
 };
 
 export const Input = ({
-  labelText = '',
   inputType = InputTypes.primary,
-  className,
-  initValue = '',
+  labelText = '',
   children,
-  textPrefix = '',
+  prefix = '',
+  postfix = '',
+  value = '',
+  onChange = noop,
+  className,
   ...props
 }) => {
+  const isButton = props.type === 'button';
   const isDisabled = inputType === InputTypes.disabled;
   const blockClass = classNames(styles._, {
     [styles.stylePrimary]: inputType === InputTypes.primary,
@@ -29,9 +37,21 @@ export const Input = ({
   const labelClass = classNames(styles.label);
   const areaClass = classNames(styles.area);
   const inputClass = classNames(styles.inputField);
-  const textPrefixClass = classNames(
-    styles.insideArea,
-    styles.insideAreaPrefix
+  const prefixComponent = (
+    <Component
+      className={classNames(styles.insideArea, styles.insideAreaPrefix)}
+    >
+      {prefix}
+    </Component>
+  );
+  const postfixComponent = (
+    <Component
+      className={classNames(styles.insideArea, styles.insideAreaPostfix, {
+        [styles.iconTargetButton]: isButton,
+      })}
+    >
+      {postfix}
+    </Component>
   );
 
   const clearButtonClass = classNames(
@@ -41,12 +61,11 @@ export const Input = ({
   );
   const clearIconClass = classNames(styles.iconTargetClear);
 
-  const isButton = props.type === 'button';
-  const iconButtonClass = classNames(
+  /* const iconButtonClass = classNames(
     styles.insideArea,
     styles.insideAreaPostfix,
     styles.iconTargetButton
-  );
+  );*/
 
   const lockIconClass = classNames(
     styles.insideArea,
@@ -54,32 +73,24 @@ export const Input = ({
     styles.iconTargetDisabled
   );
 
-  const [value, setValue] = useState(initValue);
-  const handleInputChange = ({ target: { value } }) => {
-    setValue(value);
-  };
-  const handleInputButtonClear = () => {
-    setValue('');
-  };
-
   return (
     <label className={blockClass}>
       {labelText && <div className={labelClass}>{labelText}</div>}
       <div className={areaClass}>
-        {textPrefix && <span className={textPrefixClass}>{textPrefix}</span>}
+        {prefix && prefixComponent}
         <input
           className={inputClass}
-          {...props}
           value={value}
-          onChange={handleInputChange}
+          onChange={onChange}
           disabled={isDisabled}
+          {...props}
         />
         {children}
-        {isButton && <Icon iconName={'v_arrow'} className={iconButtonClass} />}
+        {postfix && postfixComponent}
         {isDisabled && <Icon iconName={'locked'} className={lockIconClass} />}
-        {!isDisabled && !isButton && value && (
-          <button className={clearButtonClass} onClick={handleInputButtonClear}>
-            <Icon iconName={'x_medium'} className={clearIconClass} />
+        {!isDisabled && !isButton && (
+          <button className={clearButtonClass}>
+            <Icon iconName={'xMedium'} className={clearIconClass} />
           </button>
         )}
       </div>
