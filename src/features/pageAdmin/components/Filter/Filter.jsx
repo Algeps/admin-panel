@@ -1,5 +1,11 @@
 import classNames from 'classnames';
-import { Input, Button, ButtonColorTypes, Searchbar, Icon } from 'src/shared';
+import {
+  Input,
+  Button,
+  ButtonColorTypes,
+  Searchbar,
+  Icon,
+} from 'src/shared/components';
 import styles from './Filter.module.css';
 
 const noop = () => {};
