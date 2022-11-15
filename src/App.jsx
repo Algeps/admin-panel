@@ -1,6 +1,7 @@
-import PageAdmin from './components/modules/PageAdmin';
+import PageAdmin from './features/pageAdmin';
 
 import './reset.css';
+import './index.css';
 
 const App = () => <PageAdmin />;
 

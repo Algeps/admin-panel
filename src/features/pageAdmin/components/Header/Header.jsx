@@ -1,4 +1,4 @@
-import { Button, ButtonColorTypes, ButtonSizeTypes, Icon } from '../../shared';
+import { Button, ButtonColorTypes, ButtonSizeTypes, Icon } from 'src/shared';
 import styles from './Header.module.css';
 
 const Header = () => (

@@ -49,6 +49,11 @@
     "react": {
       "eslint": "recommended",
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "path": ["src"]
+      }
     }
   }
 }

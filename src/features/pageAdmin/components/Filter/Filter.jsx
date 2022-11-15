@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Input, Button, ButtonColorTypes, Searchbar, Icon } from '../../shared';
+import { Input, Button, ButtonColorTypes, Searchbar, Icon } from 'src/shared';
 import styles from './Filter.module.css';
 
 const noop = () => {};
@@ -58,14 +58,14 @@ export const Filter = ({
             )}
             labelText='Дата оформления'
             placeholder='dd.mm.yyyy'
-            prefix='с'
+            prefix={<span>с</span>}
             value={startDate}
             onChange={onStartDateChange}
           />
           <Input
             className={styles.dataRegistration}
             placeholder='dd.mm.yyyy'
-            prefix='по'
+            prefix={<span>по</span>}
             value={endDate}
             onChange={onEndDateChange}
           />
@@ -83,14 +83,14 @@ export const Filter = ({
             labelText='Сумма заказа'
             className={styles.orderAmount}
             placeholder='₽'
-            prefix='от'
+            prefix={<span>от</span>}
             value={startAmount}
             onChange={onStartAmountChange}
           />
           <Input
             className={styles.orderAmount}
             placeholder='₽'
-            prefix='до'
+            prefix={<span>до</span>}
             value={endAmount}
             onChange={onEndAmountChange}
           />

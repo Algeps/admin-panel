@@ -4,10 +4,6 @@ import styles from './Input.module.css';
 
 const noop = () => {};
 
-const Component = ({ children, className }) => {
-  return <div className={className}>{children}</div>;
-};
-
 export const InputTypes = {
   primary: 'stylePrimary',
   incorrect: 'styleIncorrect',
@@ -31,28 +27,13 @@ export const Input = ({
     [styles.stylePrimary]: inputType === InputTypes.primary,
     [styles.styleIncorrect]: inputType === InputTypes.incorrect,
     [styles.styleDisabled]: inputType === InputTypes.disabled,
+    [styles.indent]: prefix,
 
     [className]: className,
   });
   const labelClass = classNames(styles.label);
-  const areaClass = classNames(styles.area);
+  const areaClass = classNames(styles.area, { [styles.inputButton]: isButton });
   const inputClass = classNames(styles.inputField);
-  const prefixComponent = (
-    <Component
-      className={classNames(styles.insideArea, styles.insideAreaPrefix)}
-    >
-      {prefix}
-    </Component>
-  );
-  const postfixComponent = (
-    <Component
-      className={classNames(styles.insideArea, styles.insideAreaPostfix, {
-        [styles.iconTargetButton]: isButton,
-      })}
-    >
-      {postfix}
-    </Component>
-  );
 
   const clearButtonClass = classNames(
     styles.insideArea,
@@ -67,6 +48,10 @@ export const Input = ({
     styles.iconTargetButton
   );*/
 
+  // TODO 1) Придумать как очищать Input по кнопке 2) Придумать что делать с компонентом Input, type button, DropDown
+
+  // TODO ДОСМОТРЕТЬ ВИДЕО, может там будет что-то полезное
+
   const lockIconClass = classNames(
     styles.insideArea,
     styles.insideAreaPostfix,
@@ -77,7 +62,7 @@ export const Input = ({
     <label className={blockClass}>
       {labelText && <div className={labelClass}>{labelText}</div>}
       <div className={areaClass}>
-        {prefix && prefixComponent}
+        {prefix}
         <input
           className={inputClass}
           value={value}
@@ -86,7 +71,7 @@ export const Input = ({
           {...props}
         />
         {children}
-        {postfix && postfixComponent}
+        {postfix}
         {isDisabled && <Icon iconName={'locked'} className={lockIconClass} />}
         {!isDisabled && !isButton && (
           <button className={clearButtonClass}>

@@ -36,8 +36,6 @@
 }
 
 .clearButton {
-  height: 1.5rem;
-  width: 1.5rem;
   padding: 0.25rem;
 }
 
@@ -70,23 +68,31 @@
 
 /*Настройка inside-area*/
 
-.insideAreaPrefix {
+.area > *:not(input) {
+  display: flex;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: 0;
+}
+
+.area > *:not(input):not(input ~ *) {
   left: 0.5rem;
   bottom: 0.5rem;
 }
 
-.insideAreaPostfix {
+.area > input ~ * {
   right: 0.25rem;
   bottom: 0.25rem;
 }
 
-.insideAreaPrefix ~ .inputField {
+.indent .inputField {
   padding-left: 1.75rem;
 }
 
 /*Настройка icon target*/
 
-.iconTargetButton {
+.area.inputButton > input ~ svg {
   height: 1rem;
   bottom: 0.5rem;
   stroke: var(--color-day-light-blue);
