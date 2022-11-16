@@ -5,24 +5,30 @@ import {
   ButtonColorTypes,
   Searchbar,
   Icon,
+  Dropdown,
 } from 'src/shared/components';
 import styles from './Filter.module.css';
 
 const noop = () => {};
 
 export const Filter = ({
-  isOpen,
   onShowFilterButtonClick = noop,
-  mainSearch,
+  isOpen,
   onMainSearchChange = noop,
-  startDate,
+  onMainSearchReset = noop,
+  mainSearch,
   onStartDateChange = noop,
-  endDate,
+  onStartDateReset = noop,
+  startDate,
   onEndDateChange = noop,
-  startAmount,
+  onEndDateReset = noop,
+  endDate,
   onStartAmountChange = noop,
-  endAmount,
+  onStartAmountReset = noop,
+  startAmount,
   onEndAmountChange = noop,
+  onEndAmountReset = noop,
+  endAmount,
 }) => (
   <div className={styles._}>
     <div className={styles.main}>
@@ -33,6 +39,7 @@ export const Filter = ({
           placeholder='Номер заказа или ФИО'
           value={mainSearch}
           onChange={onMainSearchChange}
+          onReset={onMainSearchReset}
         />
         <Button
           color={
@@ -67,6 +74,7 @@ export const Filter = ({
             prefix={<span>с</span>}
             value={startDate}
             onChange={onStartDateChange}
+            onReset={onStartDateReset}
           />
           <Input
             className={styles.dataRegistration}
@@ -74,14 +82,19 @@ export const Filter = ({
             prefix={<span>по</span>}
             value={endDate}
             onChange={onEndDateChange}
+            onReset={onEndDateReset}
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
-          <Input
-            type='button'
-            className={styles.orderStatus}
-            labelText='Статус заказа'
-            postfix={<Icon iconName={'vArrow'} />}
+          <Dropdown
+            trigger={
+              <Input
+                type='button'
+                className={styles.orderStatus}
+                labelText='Статус заказа'
+                postfix={<Icon iconName={'vArrow'} />}
+              />
+            }
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
@@ -92,6 +105,7 @@ export const Filter = ({
             prefix={<span>от</span>}
             value={startAmount}
             onChange={onStartAmountChange}
+            onReset={onStartAmountReset}
           />
           <Input
             className={styles.orderAmount}
@@ -99,6 +113,7 @@ export const Filter = ({
             prefix={<span>до</span>}
             value={endAmount}
             onChange={onEndAmountChange}
+            onReset={onEndAmountReset}
           />
         </div>
         <Button color={ButtonColorTypes.colorClearBlue}>

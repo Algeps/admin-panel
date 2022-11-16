@@ -18,6 +18,7 @@ export const Input = ({
   postfix = '',
   value = '',
   onChange = noop,
+  onReset = noop,
   className,
   ...props
 }) => {
@@ -42,16 +43,6 @@ export const Input = ({
   );
   const clearIconClass = classNames(styles.iconTargetClear);
 
-  /* const iconButtonClass = classNames(
-    styles.insideArea,
-    styles.insideAreaPostfix,
-    styles.iconTargetButton
-  );*/
-
-  // TODO 1) Придумать как очищать Input по кнопке 2) Придумать что делать с компонентом Input, type button, DropDown
-
-  // TODO ДОСМОТРЕТЬ ВИДЕО, может там будет что-то полезное
-
   const lockIconClass = classNames(
     styles.insideArea,
     styles.insideAreaPostfix,
@@ -73,8 +64,8 @@ export const Input = ({
         {children}
         {postfix}
         {isDisabled && <Icon iconName={'locked'} className={lockIconClass} />}
-        {!isDisabled && !isButton && (
-          <button className={clearButtonClass}>
+        {!isDisabled && !isButton && value && (
+          <button className={clearButtonClass} onClick={onReset}>
             <Icon iconName={'xMedium'} className={clearIconClass} />
           </button>
         )}
