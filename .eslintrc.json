@@ -40,7 +40,8 @@
         "tabWidth": 2,
         "useTabs": false,
         "singleQuote": true,
-        "jsxSingleQuote": true
+        "jsxSingleQuote": true,
+        "endOfLine": "auto"
       }
     ],
     "no-console": 1
