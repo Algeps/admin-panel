@@ -3,11 +3,13 @@ import { FilterContainer } from './components/FilterContainer/FilterContainer';
 
 import './index.css';
 
-const PageAdmin = () => (
-  <section className='section'>
-    <Header />
-    <FilterContainer />
-  </section>
-);
+const PageAdmin = () => {
+  return (
+    <section className='section'>
+      <Header />
+      <FilterContainer />
+    </section>
+  );
+};
 
 export default PageAdmin;

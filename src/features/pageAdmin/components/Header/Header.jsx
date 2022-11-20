@@ -2,7 +2,6 @@ import {
   Button,
   ButtonColorTypes,
   ButtonSizeTypes,
-  Icon,
 } from 'src/shared/components';
 import styles from './Header.module.css';
 
@@ -12,8 +11,8 @@ const Header = () => (
     <Button
       size={ButtonSizeTypes.sizeBig}
       color={ButtonColorTypes.colorClearBlue}
+      nameIcon='sun'
     >
-      <Icon iconName='sun' />
       <span>Светлая тема</span>
     </Button>
   </header>

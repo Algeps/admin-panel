@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Filter } from '../Filter/Filter';
+import { ORDER_STATUSES } from '../../lib/orderStatus';
 
 export const FilterContainer = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -8,37 +9,73 @@ export const FilterContainer = () => {
   const [endDate, setEndDate] = useState('');
   const [startAmount, setStartAmount] = useState('5000');
   const [endAmount, setEndAmount] = useState('');
+  const [statuses, setStatuses] = useState({
+    new: false,
+    calculating: false,
+    confirm: false,
+    postponed: false,
+    done: false,
+    canceled: false,
+  });
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
 
   const handleShowFilterButtonClick = () => {
     setIsOpen((current) => !current);
   };
 
-  const createHandleChange =
-    (setter) =>
-    ({ target: { value } }) => {
-      setter(value);
-    };
+  const createHandleChange = (setter) => [
+    ({ target: { value } }) => setter(value),
+    () => setter(''),
+  ];
 
-  const createHandleReset =
-    (setter) =>
-    ({ target: { value } }) => {
-      setter((value) => '');
-    };
+  const [handleMainSearchChange, handleMainSearchReset] =
+    createHandleChange(setMainSearch);
 
-  const handleMainSearchChange = createHandleChange(setMainSearch);
-  const handleMainSearchReset = createHandleReset(setMainSearch);
+  const [handleStartDateChange, handleStartDateReset] =
+    createHandleChange(setStartDate);
 
-  const handleStartDateChange = createHandleChange(setStartDate);
-  const handleStartDateReset = createHandleReset(setStartDate);
+  const [handleEndDateChange, handleEndDateReset] =
+    createHandleChange(setEndDate);
 
-  const handleEndDateChange = createHandleChange(setEndDate);
-  const handleEndDateReset = createHandleReset(setEndDate);
+  const [handleStartAmountChange, handleStartAmountReset] =
+    createHandleChange(setStartAmount);
 
-  const handleStartAmountChange = createHandleChange(setStartAmount);
-  const handleStartAmountReset = createHandleReset(setStartAmount);
+  const [handleEndAmountChange, handleEndAmountReset] =
+    createHandleChange(setEndAmount);
 
-  const handleEndAmountChange = createHandleChange(setEndAmount);
-  const handleEndAmountReset = createHandleReset(setEndAmount);
+  const [handleStatusChange, handleStatusReset] = [
+    (status) => {
+      statuses[status] = !statuses[status];
+      setStatuses(statuses);
+    },
+    () => {
+      for (const key in statuses) {
+        if (Object.prototype.hasOwnProperty.call(statuses, key)) {
+          statuses[key] = false;
+        }
+      }
+      handleChangeStatusChoose([]);
+      setStatuses(statuses);
+    },
+  ];
+
+  const handleChangeStatusChoose = (status) => {
+    if (selectedStatuses.includes(status)) {
+      selectedStatuses.splice(selectedStatuses.indexOf(status), 1);
+    } else {
+      selectedStatuses.push(status);
+    }
+    setSelectedStatuses([...selectedStatuses]);
+  };
+
+  const handleClearAllFilters = () => {
+    handleMainSearchReset();
+    handleStartDateReset();
+    handleEndDateReset();
+    handleStartAmountReset();
+    handleEndAmountReset();
+    handleStatusReset();
+  };
 
   return (
     <Filter
@@ -59,6 +96,11 @@ export const FilterContainer = () => {
       onEndAmountChange={handleEndAmountChange}
       onEndAmountReset={handleEndAmountReset}
       endAmount={endAmount}
+      ORDER_STATUSES={ORDER_STATUSES}
+      onChangeStatusChoose={handleChangeStatusChoose}
+      onStatusChange={handleStatusChange}
+      statuses={statuses}
+      onClearAllFilters={handleClearAllFilters}
     />
   );
 };

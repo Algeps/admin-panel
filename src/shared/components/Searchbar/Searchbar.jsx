@@ -9,9 +9,7 @@ export const Searchbar = ({ iconNameBefore, className, ...props }) => {
     <Input
       type='text'
       className={blockClass}
-      prefix={
-        <Icon iconName={iconNameBefore} className={classNames(styles.icon)} />
-      }
+      prefix={<Icon iconName='search' className={classNames(styles.icon)} />}
       {...props}
     />
   );

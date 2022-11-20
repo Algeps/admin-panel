@@ -4,9 +4,8 @@ import {
   Button,
   ButtonColorTypes,
   Searchbar,
-  Icon,
-  Dropdown,
 } from 'src/shared/components';
+import { DropdownStatus } from '../../DropdownStatus/DropdownStatus';
 import styles from './Filter.module.css';
 
 const noop = () => {};
@@ -29,13 +28,17 @@ export const Filter = ({
   onEndAmountChange = noop,
   onEndAmountReset = noop,
   endAmount,
+  onStatusChange = noop,
+  onChangeStatusChoose = noop,
+  ORDER_STATUSES,
+  statuses = statuses,
+  onClearAllFilters = noop,
 }) => (
   <div className={styles._}>
     <div className={styles.main}>
       <div className={classNames(styles.group, styles.groupMain)}>
         <Searchbar
           className={styles.searchbar}
-          iconNameBefore='search'
           placeholder='Номер заказа или ФИО'
           value={mainSearch}
           onChange={onMainSearchChange}
@@ -48,16 +51,18 @@ export const Filter = ({
               : ButtonColorTypes.colorClearBlue
           }
           onClick={onShowFilterButtonClick}
+          nameIcon='filter'
         >
-          <Icon iconName='filter' />
           <span>Фильтры</span>
         </Button>
-        <Button color={ButtonColorTypes.colorClearBlue}>
+        <Button
+          color={ButtonColorTypes.colorClearBlue}
+          onClick={onClearAllFilters}
+        >
           <span>Сбросить фильтры</span>
         </Button>
       </div>
-      <Button color={ButtonColorTypes.colorClearBlue}>
-        <Icon iconName='refresh' />
+      <Button color={ButtonColorTypes.colorClearBlue} nameIcon='refresh'>
         <span>Загрузка</span>
       </Button>
     </div>
@@ -86,15 +91,12 @@ export const Filter = ({
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
-          <Dropdown
-            trigger={
-              <Input
-                type='button'
-                className={styles.orderStatus}
-                labelText='Статус заказа'
-                postfix={<Icon iconName={'vArrow'} />}
-              />
-            }
+          <DropdownStatus
+            className={styles.orderStatus}
+            statuses={statuses}
+            onStatusChange={onStatusChange}
+            onChangeStatusChoose={onChangeStatusChoose}
+            ORDER_STATUSES={ORDER_STATUSES}
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import styles from './Button.module.css';
+import { Icon } from '../Icon/Icon';
 
 export const ButtonSizeTypes = {
   sizeBig: 'sizeBig',
@@ -16,6 +17,7 @@ export const ButtonColorTypes = {
 export const Button = ({
   size = ButtonSizeTypes.sizeBig,
   color = ButtonColorTypes.colorBlue,
+  nameIcon = '',
   children,
   ...props
 }) => {
@@ -30,6 +32,7 @@ export const Button = ({
   });
   return (
     <button className={blockClass} {...props}>
+      <Icon iconName={nameIcon} />
       {children}
     </button>
   );

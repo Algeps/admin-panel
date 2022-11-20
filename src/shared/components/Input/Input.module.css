@@ -81,7 +81,7 @@
   bottom: 0.5rem;
 }
 
-.area > input ~ * {
+.area > input ~ button {
   right: 0.25rem;
   bottom: 0.25rem;
 }
@@ -90,15 +90,12 @@
   padding-left: 1.75rem;
 }
 
-/*Настройка icon target*/
-
-.area.inputButton > input ~ svg {
-  height: 1rem;
+.postfix {
   bottom: 0.5rem;
-  stroke: var(--color-day-light-blue);
-  fill: var(--color-day-light-blue);
-  cursor: pointer;
+  right: 0.25rem;
 }
+
+/*Настройка icon target*/
 
 .iconTargetDisabled {
   height: 1rem;

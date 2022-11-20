@@ -1,39 +1,35 @@
 import classNames from 'classnames';
 import { Icon } from '../Icon/Icon';
 import styles from './Input.module.css';
+import React from 'react';
 
 const noop = () => {};
 
-export const InputTypes = {
-  primary: 'stylePrimary',
-  incorrect: 'styleIncorrect',
-  disabled: 'styleDisabled',
-};
-
 export const Input = ({
-  inputType = InputTypes.primary,
   labelText = '',
   children,
   prefix = '',
   postfix = '',
   value = '',
+  disabled = false,
+  incorrect = false,
   onChange = noop,
   onReset = noop,
   className,
   ...props
 }) => {
-  const isButton = props.type === 'button';
-  const isDisabled = inputType === InputTypes.disabled;
-  const blockClass = classNames(styles._, {
-    [styles.stylePrimary]: inputType === InputTypes.primary,
-    [styles.styleIncorrect]: inputType === InputTypes.incorrect,
-    [styles.styleDisabled]: inputType === InputTypes.disabled,
-    [styles.indent]: prefix,
-
-    [className]: className,
-  });
+  const blockClass = classNames(
+    styles._,
+    styles.stylePrimary,
+    {
+      [styles.styleIncorrect]: incorrect,
+      [styles.styleDisabled]: disabled,
+      [styles.indent]: prefix,
+    },
+    className
+  );
   const labelClass = classNames(styles.label);
-  const areaClass = classNames(styles.area, { [styles.inputButton]: isButton });
+  const areaClass = classNames(styles.area);
   const inputClass = classNames(styles.inputField);
 
   const clearButtonClass = classNames(
@@ -49,6 +45,10 @@ export const Input = ({
     styles.iconTargetDisabled
   );
 
+  const clonePostfix = React.cloneElement(postfix, {
+    className: classNames(postfix?.props?.className, styles.postfix),
+  });
+
   return (
     <label className={blockClass}>
       {labelText && <div className={labelClass}>{labelText}</div>}
@@ -58,13 +58,13 @@ export const Input = ({
           className={inputClass}
           value={value}
           onChange={onChange}
-          disabled={isDisabled}
+          disabled={disabled}
           {...props}
         />
         {children}
-        {postfix}
-        {isDisabled && <Icon iconName={'locked'} className={lockIconClass} />}
-        {!isDisabled && !isButton && value && (
+        {postfix && clonePostfix}
+        {disabled && <Icon iconName={'locked'} className={lockIconClass} />}
+        {!disabled && !postfix && value && (
           <button className={clearButtonClass} onClick={onReset}>
             <Icon iconName={'xMedium'} className={clearIconClass} />
           </button>
