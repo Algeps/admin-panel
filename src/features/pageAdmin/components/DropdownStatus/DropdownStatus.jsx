@@ -1,18 +1,14 @@
 import { Dropdown, Icon, Input, Checkbox } from 'src/shared/components';
+import { FilterContext } from '../../';
+import { useContext } from 'react';
 import styles from './DropdownStatus.module.css';
 import classNames from 'classnames';
 
-const noop = () => {};
+export const DropdownStatusContainer = ({ className }) => {
+  const { ORDER_STATUSES, onChangeStatusChoose, onStatusChange, statuses } =
+    useContext(FilterContext);
 
-export const DropdownStatus = ({
-  statuses,
-  className,
-  onStatusChange = noop,
-  onChangeStatusChoose = noop,
-  ORDER_STATUSES,
-  ...props
-}) => {
-  const blockClass = classNames(styles._, className);
+  const dropdownClass = classNames(styles._, className);
   let selectedStatuses = Object.keys(statuses).filter((e) => statuses[e]);
   if (
     selectedStatuses.length === 0 ||
@@ -27,8 +23,28 @@ export const DropdownStatus = ({
     selectedStatuses = res;
   }
   return (
+    <DropdownStatus
+      dropdownClass={dropdownClass}
+      onChangeStatusChoose={onChangeStatusChoose}
+      onStatusChange={onStatusChange}
+      selectedStatuses={selectedStatuses}
+      statuses={statuses}
+      ORDER_STATUSES={ORDER_STATUSES}
+    />
+  );
+};
+
+const DropdownStatus = ({
+  dropdownClass,
+  onChangeStatusChoose,
+  onStatusChange,
+  selectedStatuses,
+  statuses,
+  ORDER_STATUSES,
+}) => {
+  return (
     <Dropdown
-      className={blockClass}
+      className={dropdownClass}
       trigger={
         <Input
           type='button'
@@ -52,7 +68,6 @@ export const DropdownStatus = ({
         </label>
       ))}
       childrenClassNames={{ overlay: styles.overlay }}
-      {...props}
     />
   );
 };

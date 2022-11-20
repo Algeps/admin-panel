@@ -1,38 +1,83 @@
 import classNames from 'classnames';
+import { useState } from 'react';
+import { FilterContext } from '../..';
+import { useContext } from 'react';
 import {
   Input,
   Button,
   ButtonColorTypes,
   Searchbar,
 } from 'src/shared/components';
-import { DropdownStatus } from '../../DropdownStatus/DropdownStatus';
+import { DropdownStatusContainer } from '../DropdownStatus/DropdownStatus';
 import styles from './Filter.module.css';
 
-const noop = () => {};
+export const FilterContainer = () => {
+  const {
+    onMainSearchChange,
+    onMainSearchReset,
+    mainSearch,
+    onStartDateChange,
+    onStartDateReset,
+    startDate,
+    onEndDateChange,
+    onEndDateReset,
+    endDate,
+    onStartAmountChange,
+    onStartAmountReset,
+    startAmount,
+    onEndAmountChange,
+    onEndAmountReset,
+    endAmount,
+    onClearAllFilters,
+  } = useContext(FilterContext);
+  const [isOpen, setIsOpen] = useState(true);
+  const handleShowFilterButtonClick = () => {
+    setIsOpen((current) => !current);
+  };
 
-export const Filter = ({
-  onShowFilterButtonClick = noop,
+  return (
+    <Filter
+      onShowFilterButtonClick={handleShowFilterButtonClick}
+      isOpen={isOpen}
+      onMainSearchChange={onMainSearchChange}
+      onMainSearchReset={onMainSearchReset}
+      mainSearch={mainSearch}
+      onStartDateChange={onStartDateChange}
+      onStartDateReset={onStartDateReset}
+      startDate={startDate}
+      onEndDateChange={onEndDateChange}
+      onEndDateReset={onEndDateReset}
+      endDate={endDate}
+      onStartAmountChange={onStartAmountChange}
+      onStartAmountReset={onStartAmountReset}
+      startAmount={startAmount}
+      onEndAmountChange={onEndAmountChange}
+      onEndAmountReset={onEndAmountReset}
+      endAmount={endAmount}
+      onClearAllFilters={onClearAllFilters}
+    />
+  );
+};
+
+const Filter = ({
+  onShowFilterButtonClick,
   isOpen,
-  onMainSearchChange = noop,
-  onMainSearchReset = noop,
+  onMainSearchChange,
+  onMainSearchReset,
   mainSearch,
-  onStartDateChange = noop,
-  onStartDateReset = noop,
+  onStartDateChange,
+  onStartDateReset,
   startDate,
-  onEndDateChange = noop,
-  onEndDateReset = noop,
+  onEndDateChange,
+  onEndDateReset,
   endDate,
-  onStartAmountChange = noop,
-  onStartAmountReset = noop,
+  onStartAmountChange,
+  onStartAmountReset,
   startAmount,
-  onEndAmountChange = noop,
-  onEndAmountReset = noop,
+  onEndAmountChange,
+  onEndAmountReset,
   endAmount,
-  onStatusChange = noop,
-  onChangeStatusChoose = noop,
-  ORDER_STATUSES,
-  statuses = statuses,
-  onClearAllFilters = noop,
+  onClearAllFilters,
 }) => (
   <div className={styles._}>
     <div className={styles.main}>
@@ -91,13 +136,7 @@ export const Filter = ({
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
-          <DropdownStatus
-            className={styles.orderStatus}
-            statuses={statuses}
-            onStatusChange={onStatusChange}
-            onChangeStatusChoose={onChangeStatusChoose}
-            ORDER_STATUSES={ORDER_STATUSES}
-          />
+          <DropdownStatusContainer className={styles.orderStatus} />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
