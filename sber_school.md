@@ -30,8 +30,8 @@
   - [x] Кнопка светлая тема тоже просто статичная
 
 ## 3. Собрать таблицу на mocks
-  - [ ] Минимум должны быть общие компоненты: Table, TableHeader, TableFooter, TableBody, TableRow, TableCell, TableHeaderCell, Checkbox
-  - [ ] В таблице есть 100 записей ([Можно сгенерировать](https://json-generator.com/)). Данные лежат в отдельном файле в константе.
+  - [x] Минимум должны быть общие компоненты: Table, TableHeader, TableFooter, TableBody, TableRow, TableCell, TableHeaderCell, Checkbox
+  - [x] В таблице есть 100 записей ([Можно сгенерировать](https://json-generator.com/)). Данные лежат в отдельном файле в константе.
   - [ ] Body у таблицы корректно скроллится. Если у таблицы только один ряд, то футер никуда не уезжает а также корректно вытягивается на всю страницу
 
 ## 4. Redux time
