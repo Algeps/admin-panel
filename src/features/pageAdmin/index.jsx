@@ -26,6 +26,7 @@ const PageAdmin = () => {
   const [endAmount, setEndAmount] = useState('');
   const [statuses, setStatuses] = useState(orderStatusSwitch);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [pageNumber, setPageNumber] = useState('');
 
   const createHandleChange = (setter) => [
     ({ target: { value } }) => setter(value),
@@ -46,6 +47,9 @@ const PageAdmin = () => {
 
   const [handleEndAmountChange, handleEndAmountReset] =
     createHandleChange(setEndAmount);
+
+  const [handlePageNumberChange, handlePageNumberReset] =
+    createHandleChange(setPageNumber);
 
   const [handleStatusChange, handleStatusReset] = [
     (status) => {
@@ -106,6 +110,9 @@ const PageAdmin = () => {
         statuses: statuses,
         onClearAllFilters: handleClearAllFilters,
         ORDERS,
+        onPageNumberChange: handlePageNumberChange,
+        onPageNumberReset: handlePageNumberReset,
+        pageNumber: pageNumber,
       }}
     >
       <section className='section'>
