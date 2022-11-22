@@ -1,5 +1,5 @@
 import { Icon, TableCell } from 'src/shared/components';
-import { FilterContext } from 'src/features/PageAdmin';
+import { FilterContext } from 'src/features/PageAdmin/PageAdmin';
 import { useContext } from 'react';
 import classNames from 'classnames';
 import styles from './StatusTableCell.module.css';

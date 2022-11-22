@@ -1,5 +1,5 @@
 import { Dropdown, Icon, Input, Checkbox } from 'src/shared/components';
-import { FilterContext } from '../../';
+import { FilterContext } from '../../PageAdmin';
 import { useContext } from 'react';
 import styles from './DropdownStatus.module.css';
 import classNames from 'classnames';

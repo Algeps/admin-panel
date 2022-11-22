@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { FilterContext } from '../..';
+import { FilterContext } from '../../PageAdmin';
 import { useContext } from 'react';
 import {
   Input,
