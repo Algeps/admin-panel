@@ -7,7 +7,7 @@ import {
   ButtonSizeTypes,
   ButtonColorTypes,
 } from 'src/shared/components';
-import { DropdownDeleteRow } from '../DropdownDeleteRow/DropdownDeleteRow';
+import { DropdownDeleteRow } from '../OrderTableDeleteRowDropdown/OrderTableDeleteRowDropdown';
 import { DropdownNumberPage } from '../DropdownNumberPage/DropdownNumberPage';
 
 export const OrderTableFooter = () => {
@@ -22,33 +22,19 @@ export const OrderTableFooter = () => {
       </div>
       <div className={styles.group}>
         <div className={classNames(styles.group, styles.numberPageGroup)}>
-          <Button size={ButtonSizeTypes.sizeSlim}>
-            <span>1</span>
-          </Button>
-          <Button
-            size={ButtonSizeTypes.sizeSlim}
-            color={ButtonColorTypes.colorClearBlue}
-          >
-            <span>2</span>
-          </Button>
-          <Button
-            size={ButtonSizeTypes.sizeSlim}
-            color={ButtonColorTypes.colorClearBlue}
-          >
-            <span>3</span>
-          </Button>
-          <Button
-            size={ButtonSizeTypes.sizeSlim}
-            color={ButtonColorTypes.colorClearBlue}
-          >
-            <span>...</span>
-          </Button>
-          <Button
-            size={ButtonSizeTypes.sizeSlim}
-            color={ButtonColorTypes.colorClearBlue}
-          >
-            <span>18</span>
-          </Button>
+          {['1', '2', '3', '...', '18'].map((e) => (
+            <Button
+              key={e}
+              size={ButtonSizeTypes.sizeSlim}
+              color={
+                e === '1'
+                  ? ButtonColorTypes.colorBlue
+                  : ButtonColorTypes.colorClearBlue
+              }
+            >
+              <span>{e}</span>
+            </Button>
+          ))}
         </div>
         <DropdownNumberPage />
       </div>
