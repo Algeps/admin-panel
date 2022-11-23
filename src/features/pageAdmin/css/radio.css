@@ -1,0 +1,29 @@
+.radio__input {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--color-white);
+  border: 0.0625rem solid var(--color-day-light-blue);
+  border-radius: 1rem;
+  box-sizing: border-box;
+  margin: 0;
+  outline: 0;
+}
+
+.radio__input:checked {
+  border: 0.25rem solid var(--color-blue);
+}
+
+.radio__input:checked + .radio__label {
+  color: var(--color-blue);
+}
+
+.radio__input_display_none {
+  display: none;
+}
+
+.radio__label {
+  display: flex;
+  align-items: center;
+  height: 1rem;
+}

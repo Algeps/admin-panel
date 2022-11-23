@@ -1,0 +1,11 @@
+._ {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.text {
+  font-size: 1.625rem;
+  font-weight: 700;
+}

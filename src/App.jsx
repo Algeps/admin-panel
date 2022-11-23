@@ -1,22 +1,8 @@
-import './App.css';
+import PageAdmin from './features/PageAdmin';
 
-function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>Первое приложение на React</p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './reset.css';
+import './index.css';
+
+const App = () => <PageAdmin />;
 
 export default App;

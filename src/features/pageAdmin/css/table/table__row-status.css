@@ -1,0 +1,46 @@
+.table__status-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.table__row-status_new,
+.table__row-status_calculation,
+.table__row-status_access,
+.table__row-status_postpone,
+.table__row-status_cancel {
+  color: var(--color-black);
+}
+
+.table__row-status_new .table__status-icon {
+  fill: var(--color-status-icon-new);
+  stroke: var(--color-status-icon-new);
+}
+
+.table__row-status_calculation .table__status-icon {
+  fill: var(--color-status-icon-calculation);
+  stroke: var(--color-status-icon-calculation);
+}
+
+.table__row-status_access .table__status-icon {
+  fill: var(--color-status-icon-access);
+  stroke: var(--color-status-icon-access);
+}
+
+.table__row-status_postpone .table__status-icon {
+  fill: var(--color-status-icon-postpone);
+  stroke: var(--color-status-icon-postpone);
+}
+
+.table__row-status_cancel .table__status-icon {
+  fill: var(--color-status-icon-cancel);
+  stroke: var(--color-status-icon-cancel);
+}
+
+.table__row-status_done {
+  color: var(--color-green);
+}
+
+.table__row-status_done .table__status-icon {
+  fill: var(--color-status-icon-done);
+  stroke: var(--color-status-icon-done);
+}

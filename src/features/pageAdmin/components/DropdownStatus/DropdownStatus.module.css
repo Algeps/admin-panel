@@ -1,0 +1,26 @@
+._ {
+  width: 12rem;
+}
+
+.overlayItem {
+  display: inline-flex;
+  height: 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.overlay {
+  top: 3.75rem;
+  right: 0;
+  padding: 0.5rem 0 0.5rem 0;
+  width: 10rem;
+}
+
+/*Стиль для иконки внутри StatusInput*/
+
+.iconInputPostfix {
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+}
