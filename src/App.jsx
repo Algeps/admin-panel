@@ -1,4 +1,4 @@
-import PageAdmin from './features/PageAdmin';
+import PageAdmin from './features/pageAdmin';
 
 import './reset.css';
 import './index.css';

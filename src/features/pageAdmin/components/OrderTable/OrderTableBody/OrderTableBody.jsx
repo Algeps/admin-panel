@@ -1,6 +1,6 @@
 import styles from './OrderTableBody.module.css';
 import { useContext } from 'react';
-import { FilterContext } from 'src/features/PageAdmin';
+import { FilterContext } from 'src/features/pageAdmin';
 import { TableBody } from 'src/shared/components';
 import { OrderTableBodyRow } from '../OrderTableBodyRow/OrderTableBodyRow';
 

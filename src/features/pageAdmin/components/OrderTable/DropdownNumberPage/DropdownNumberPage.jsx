@@ -9,7 +9,7 @@ import {
 import classNames from 'classnames';
 import styles from './DropdownNumberPage.module.css';
 import { useContext } from 'react';
-import { FilterContext } from 'src/features/PageAdmin';
+import { FilterContext } from 'src/features/pageAdmin';
 
 export const DropdownNumberPage = ({ className }) => {
   const { pageNumber, onPageNumberChange, onPageNumberReset } =
