@@ -8,7 +8,8 @@ const initialState = {
   amountTo: '',
   statuses: [],
   sortColumn: 'date',
-  directionColumn: 1,
+  direction: 1,
+  amount: '',
   numberOfPage: 1,
 };
 

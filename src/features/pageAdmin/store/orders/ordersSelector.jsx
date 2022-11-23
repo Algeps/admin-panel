@@ -19,9 +19,21 @@ export const getOrders = createSelector(
         filteringByFullName(e.customer, filters.mainSearch) &&
         filteringByStatus(e.status, filters.statuses)
     );
+    temp.sort((e1, e2) => sortingByField(e1, e2, filters));
     return temp;
   }
 );
+
+const sortingByField = (e1, e2, filters) => {
+  if (filters.sortColumn === 'date' || filters.sortColumn === 'status') {
+    return e1[filters.sortColumn] > e2[filters.sortColumn]
+      ? -filters.direction
+      : filters.direction;
+  }
+  return Number(e1[filters.sortColumn]) > Number(e2[filters.sortColumn])
+    ? -filters.direction
+    : filters.direction;
+};
 
 const filteringByStatus = (status, filtersStatuses) =>
   filtersStatuses.length === 0

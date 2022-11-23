@@ -4,5 +4,7 @@ export const getDateTo = (state) => state.filters.dateTo;
 export const getAmountFrom = (state) => state.filters.amountFrom;
 export const getAmountTo = (state) => state.filters.amountTo;
 export const getStatuses = (state) => state.filters.statuses;
+export const getSortColumn = (state) => state.filters.sortColumn;
+export const getDirection = (state) => state.filters.direction;
 export const getSelectedStatuses = (state) => state.filters.selectedStatuses;
 export const getNumberOfPage = (state) => state.filters.numberOfPage;

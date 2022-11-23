@@ -2,3 +2,11 @@
   fill: var(--color-white);
   stroke: var(--color-white);
 }
+
+.isActive {
+  background-color: var(--color-active);
+}
+
+.rotateIcon {
+  transform: rotate(180deg);
+}
