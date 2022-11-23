@@ -1,11 +1,10 @@
 import { Icon, TableCell } from 'src/shared/components';
-import { FilterContext } from 'src/features/PageAdmin/PageAdmin';
-import { useContext } from 'react';
 import classNames from 'classnames';
 import styles from './StatusTableCell.module.css';
+import { ORDER_STATUSES } from 'src/features/PageAdmin/lib/orderStatus';
+import { ORDER_STATUSES_ICON } from 'src/features/PageAdmin/lib/orderStatusIcon';
 
 export const StatusTableCell = ({ status, className }) => {
-  const { ORDER_STATUSES_ICON, ORDER_STATUSES } = useContext(FilterContext);
   const blockClassName = classNames(className, {
     [styles.completed]: status === 'completed',
   });

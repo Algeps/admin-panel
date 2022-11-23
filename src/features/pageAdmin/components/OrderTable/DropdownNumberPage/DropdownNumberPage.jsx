@@ -8,12 +8,17 @@ import {
 
 import classNames from 'classnames';
 import styles from './DropdownNumberPage.module.css';
-import { useContext } from 'react';
-import { FilterContext } from 'src/features/PageAdmin/PageAdmin';
+import { useState } from 'react';
 
 export const DropdownNumberPage = ({ className }) => {
-  const { pageNumber, onPageNumberChange, onPageNumberReset } =
-    useContext(FilterContext);
+  const [pageNumber, setPageNumber] = useState('');
+  const createHandleChange = (setter) => [
+    ({ target: { value } }) => setter(value),
+    () => setter(''),
+  ];
+  const [onPageNumberChange, onPageNumberReset] =
+    createHandleChange(setPageNumber);
+
   return (
     <Dropdown
       trigger={

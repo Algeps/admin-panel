@@ -1,13 +1,14 @@
 import { Dropdown, Icon, Input, Checkbox } from 'src/shared/components';
-import { FilterContext } from '../../PageAdmin';
-import { useContext } from 'react';
 import styles from './DropdownStatus.module.css';
 import classNames from 'classnames';
+import { ORDER_STATUSES } from '../../lib/orderStatus';
 
-export const DropdownStatusContainer = ({ className }) => {
-  const { ORDER_STATUSES, onChangeStatusChoose, onStatusChange, statuses } =
-    useContext(FilterContext);
-
+export const DropdownStatusContainer = ({
+  className,
+  onChangeStatusChoose,
+  onStatusChange,
+  statuses,
+}) => {
   const dropdownClass = classNames(styles._, className);
   let selectedStatuses = Object.keys(statuses).filter((e) => statuses[e]);
   if (
@@ -60,7 +61,7 @@ const DropdownStatus = ({
           <Checkbox
             onChange={() => {
               onStatusChange(key);
-              onChangeStatusChoose(value);
+              onChangeStatusChoose(key);
             }}
             checked={statuses[key]}
           />

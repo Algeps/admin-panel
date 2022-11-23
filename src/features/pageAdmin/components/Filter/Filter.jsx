@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { useState } from 'react';
-import { FilterContext } from '../../PageAdmin';
-import { useContext } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setFilter, resetAllFilters } from '../../store/filters/filtersSlice';
 import {
   Input,
   Button,
@@ -11,50 +12,112 @@ import {
 import { DropdownStatusContainer } from '../DropdownStatus/DropdownStatus';
 import styles from './Filter.module.css';
 
+const orderStatusSwitch = {
+  new: false,
+  calculation: false,
+  confirmed: false,
+  postponed: false,
+  completed: false,
+  canceled: false,
+};
+
 export const FilterContainer = () => {
-  const {
-    onMainSearchChange,
-    onMainSearchReset,
-    mainSearch,
-    onStartDateChange,
-    onStartDateReset,
-    startDate,
-    onEndDateChange,
-    onEndDateReset,
-    endDate,
-    onStartAmountChange,
-    onStartAmountReset,
-    startAmount,
-    onEndAmountChange,
-    onEndAmountReset,
-    endAmount,
-    onClearAllFilters,
-  } = useContext(FilterContext);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(true);
+  const [mainSearch, setMainSearch] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [startAmount, setStartAmount] = useState('');
+  const [endAmount, setEndAmount] = useState('');
+  const [statuses, setStatuses] = useState(orderStatusSwitch);
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
+
   const handleShowFilterButtonClick = () => {
     setIsOpen((current) => !current);
+  };
+
+  const createHandleChange = (setter) => [
+    ({ target: { value } }) => setter(value),
+    () => setter(''),
+  ];
+
+  const [handleMainSearchChange, handleMainSearchReset] =
+    createHandleChange(setMainSearch);
+  const [handleStartDateChange, handleStartDateReset] =
+    createHandleChange(setStartDate);
+  const [handleEndDateChange, handleEndDateReset] =
+    createHandleChange(setEndDate);
+  const [handleStartAmountChange, handleStartAmountReset] =
+    createHandleChange(setStartAmount);
+  const [handleEndAmountChange, handleEndAmountReset] =
+    createHandleChange(setEndAmount);
+  const [handleStatusChange, handleStatusReset] = [
+    (status) => {
+      statuses[status] = !statuses[status];
+      setStatuses(statuses);
+    },
+    () => {
+      for (const key in statuses) {
+        if (Object.prototype.hasOwnProperty.call(statuses, key)) {
+          statuses[key] = false;
+        }
+      }
+      setSelectedStatuses([]);
+      setStatuses(statuses);
+    },
+  ];
+
+  const handleChangeStatusChoose = (status) =>
+    selectedStatuses.includes(status)
+      ? setSelectedStatuses(selectedStatuses.filter((e) => e !== status))
+      : setSelectedStatuses([...selectedStatuses, status]);
+
+  const handleResetAllFiltersClick = () => {
+    handleMainSearchReset();
+    handleStartDateReset();
+    handleEndDateReset();
+    handleStartAmountReset();
+    handleEndAmountReset();
+    handleStatusReset();
+    dispatch(resetAllFilters());
+  };
+
+  useEffect(() => {
+    dispatch(setFilter({ key: 'mainSearch', value: mainSearch }));
+  }, [mainSearch]);
+
+  const handleApplyFilterOnClick = () => {
+    dispatch(setFilter({ key: 'dateFrom', value: startDate }));
+    dispatch(setFilter({ key: 'dateTo', value: endDate }));
+    dispatch(setFilter({ key: 'statuses', value: selectedStatuses }));
+    dispatch(setFilter({ key: 'amountFrom', value: startAmount }));
+    dispatch(setFilter({ key: 'amountTo', value: endAmount }));
   };
 
   return (
     <Filter
       onShowFilterButtonClick={handleShowFilterButtonClick}
       isOpen={isOpen}
-      onMainSearchChange={onMainSearchChange}
-      onMainSearchReset={onMainSearchReset}
+      onMainSearchChange={handleMainSearchChange}
+      onMainSearchReset={handleMainSearchReset}
       mainSearch={mainSearch}
-      onStartDateChange={onStartDateChange}
-      onStartDateReset={onStartDateReset}
+      onStartDateChange={handleStartDateChange}
+      onStartDateReset={handleStartDateReset}
       startDate={startDate}
-      onEndDateChange={onEndDateChange}
-      onEndDateReset={onEndDateReset}
+      onEndDateChange={handleEndDateChange}
+      onEndDateReset={handleEndDateReset}
       endDate={endDate}
-      onStartAmountChange={onStartAmountChange}
-      onStartAmountReset={onStartAmountReset}
+      onStartAmountChange={handleStartAmountChange}
+      onStartAmountReset={handleStartAmountReset}
       startAmount={startAmount}
-      onEndAmountChange={onEndAmountChange}
-      onEndAmountReset={onEndAmountReset}
+      onEndAmountChange={handleEndAmountChange}
+      onEndAmountReset={handleEndAmountReset}
       endAmount={endAmount}
-      onClearAllFilters={onClearAllFilters}
+      onResetAllFiltersClick={handleResetAllFiltersClick}
+      onStatusChange={handleStatusChange}
+      onChangeStatusChoose={handleChangeStatusChoose}
+      statuses={statuses}
+      onApplyFilterOnClick={handleApplyFilterOnClick}
     />
   );
 };
@@ -77,7 +140,11 @@ const Filter = ({
   onEndAmountChange,
   onEndAmountReset,
   endAmount,
-  onClearAllFilters,
+  onResetAllFiltersClick,
+  onStatusChange,
+  onChangeStatusChoose,
+  statuses,
+  onApplyFilterOnClick,
 }) => (
   <div className={styles._}>
     <div className={styles.main}>
@@ -102,7 +169,7 @@ const Filter = ({
         </Button>
         <Button
           color={ButtonColorTypes.colorClearBlue}
-          onClick={onClearAllFilters}
+          onClick={onResetAllFiltersClick}
         >
           <span>Сбросить фильтры</span>
         </Button>
@@ -136,7 +203,12 @@ const Filter = ({
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
-          <DropdownStatusContainer className={styles.orderStatus} />
+          <DropdownStatusContainer
+            className={styles.orderStatus}
+            onChangeStatusChoose={onChangeStatusChoose}
+            onStatusChange={onStatusChange}
+            statuses={statuses}
+          />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
@@ -157,7 +229,10 @@ const Filter = ({
             onReset={onEndAmountReset}
           />
         </div>
-        <Button color={ButtonColorTypes.colorClearBlue}>
+        <Button
+          color={ButtonColorTypes.colorClearBlue}
+          onClick={onApplyFilterOnClick}
+        >
           <span>Применить</span>
         </Button>
       </div>
