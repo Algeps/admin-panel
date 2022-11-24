@@ -17,6 +17,8 @@
   --color-status-postponed: #ff8c56;
   --color-status-completed: #0fb864;
   --color-status-canceled: #000000;
+
+  --color-selected-row: #ebf0f5;
 }
 
 * {
