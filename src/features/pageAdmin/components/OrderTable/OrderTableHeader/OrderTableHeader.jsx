@@ -29,6 +29,7 @@ const sortColumns = {
 };
 
 export const OrderTableHeader = ({
+  isAllRowsSelected = false,
   onSelectedRows = noop,
   onSelectedRowsReset = noop,
 }) => {
@@ -50,7 +51,7 @@ export const OrderTableHeader = ({
     <TableHeader>
       <TableRow>
         <TableCell className={stylesRow.headerCell}>
-          <Checkbox onChange={handleChecked} />
+          <Checkbox onChange={handleChecked} checked={isAllRowsSelected} />
         </TableCell>
 
         <TableCell className={classNames(stylesRow.headerCell, stylesRow.id)}>

@@ -6,6 +6,7 @@ import { Table } from 'src/shared/components/';
 import { OrderTableHeader } from './OrderTableHeader/OrderTableHeader';
 import { OrderTableBody } from './OrderTableBody/OrderTableBody';
 import { OrderTableFooter } from './OrderTableFooter/OrderTableFooter';
+import { useEffect } from 'react';
 
 const init = [];
 
@@ -31,9 +32,16 @@ export const OrderTable = () => {
     },
   ];
 
+  useEffect(() => {
+    return () => {
+      handleSelectedRowsReset();
+    };
+  }, [orders]);
+
   return (
     <Table>
       <OrderTableHeader
+        isAllRowsSelected={selectedRows.length !== 0}
         onSelectedRows={handleSelectedRows}
         onSelectedRowsReset={handleSelectedRowsReset}
       ></OrderTableHeader>
