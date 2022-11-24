@@ -6,15 +6,24 @@ import { DropdownDeleteRow } from '../DropdownDeleteRow/DropdownDeleteRow';
 import { Pagination } from './Pagination/Pagination';
 import { DropdownNumberPage } from '../DropdownNumberPage/DropdownNumberPage';
 
-export const OrderTableFooter = ({ numberOfRow }) => {
+export const OrderTableFooter = ({
+  numberOfRow,
+  numberOfSelectedRows,
+  onDeleteRowsClick,
+}) => {
   return (
     <TableFooter className={styles._}>
       <div className={styles.group}>
-        <span className={styles.text}>Выбранно записей: n</span>
+        <span className={styles.text}>
+          Выбранно записей: {numberOfSelectedRows}
+        </span>
         <Button size={ButtonSizeTypes.sizeSlim} nameIcon='pencil'>
           <span>Изменить статус</span>
         </Button>
-        <DropdownDeleteRow />
+        <DropdownDeleteRow
+          numberOfSelectedRows={numberOfSelectedRows}
+          onDeleteRowsClick={onDeleteRowsClick}
+        />
       </div>
       <div className={styles.group}>
         <Pagination

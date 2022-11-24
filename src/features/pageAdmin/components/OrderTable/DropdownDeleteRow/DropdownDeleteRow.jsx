@@ -1,42 +1,48 @@
 import classNames from 'classnames';
+import { useState } from 'react';
+
 import {
   Button,
-  Dropdown,
   ButtonSizeTypes,
   ButtonColorTypes,
 } from 'src/shared/components';
-
 import styles from './DropdownDeleteRow.module.css';
 
-export const DropdownDeleteRow = ({ className }) => {
-  const toggle = (
-    <Button
-      nameIcon='bin'
-      size={ButtonSizeTypes.sizeSlim}
-      color={ButtonColorTypes.colorRed}
-    >
-      <span>Удалить</span>
-    </Button>
-  );
+export const DropdownDeleteRow = ({
+  className,
+  numberOfSelectedRows,
+  onDeleteRowsClick,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsOpen((val) => !val);
+  };
+
   return (
-    <Dropdown
-      className={className}
-      trigger={toggle}
-      overlay={
-        <>
-          <span>Удалить n записей?</span>
+    <div className={classNames(className, styles._)}>
+      <Button
+        nameIcon='bin'
+        size={ButtonSizeTypes.sizeSlim}
+        color={ButtonColorTypes.colorRed}
+        onClick={toggleDropdown}
+      >
+        <span>Удалить</span>
+      </Button>
+      {isOpen && numberOfSelectedRows !== 0 && (
+        <div className={classNames(styles.overlay)}>
+          <span>Удалить {numberOfSelectedRows} записей?</span>
           <Button
             size={ButtonSizeTypes.sizeSlim}
             color={ButtonColorTypes.colorClearBlue}
+            onClick={onDeleteRowsClick}
           >
             <span>Удалить</span>
           </Button>
-          <Button size={ButtonSizeTypes.sizeSlim}>
+          <Button size={ButtonSizeTypes.sizeSlim} onClick={toggleDropdown}>
             <span>Отмена</span>
           </Button>
-        </>
-      }
-      childrenClassNames={{ overlay: classNames(styles.overlay) }}
-    />
+        </div>
+      )}
+    </div>
   );
 };

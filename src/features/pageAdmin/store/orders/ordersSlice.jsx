@@ -8,7 +8,12 @@ const initialState = {
 const ordersSlice = createSlice({
   name: 'orders',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteOrders(state, { payload: { ids } }) {
+      state.orders = state.orders.filter((e) => !ids.includes(e.id));
+    },
+  },
 });
 
+export const { deleteOrders } = ordersSlice.actions;
 export const ordersReducer = ordersSlice.reducer;
