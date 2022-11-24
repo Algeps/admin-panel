@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { PAGE_SIZE } from 'src/features/PageAdmin/lib/pageAdmin.constants';
 
 const getOrderList = (state) => state.orders.orders;
 const getFilters = (state) => state.filters;
@@ -20,9 +21,15 @@ export const getOrders = createSelector(
         filteringByStatus(e.status, filters.statuses)
     );
     temp.sort((e1, e2) => sortingByField(e1, e2, filters));
-    return temp;
+    return [pagination(temp, filters), temp.length];
   }
 );
+
+const pagination = (orders, filters) => {
+  const begin = PAGE_SIZE * (filters.pageNumber - 1);
+  const end = PAGE_SIZE * filters.pageNumber;
+  return orders.slice(begin, end);
+};
 
 const sortingByField = (e1, e2, filters) => {
   if (filters.sortColumn === 'date' || filters.sortColumn === 'status') {

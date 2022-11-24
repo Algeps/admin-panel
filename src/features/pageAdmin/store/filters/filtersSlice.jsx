@@ -10,7 +10,7 @@ const initialState = {
   sortColumn: 'date',
   direction: 1,
   amount: '',
-  numberOfPage: 1,
+  pageNumber: 1,
 };
 
 const filtersSlice = createSlice({

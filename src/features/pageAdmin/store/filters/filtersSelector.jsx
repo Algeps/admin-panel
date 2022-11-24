@@ -7,4 +7,4 @@ export const getStatuses = (state) => state.filters.statuses;
 export const getSortColumn = (state) => state.filters.sortColumn;
 export const getDirection = (state) => state.filters.direction;
 export const getSelectedStatuses = (state) => state.filters.selectedStatuses;
-export const getNumberOfPage = (state) => state.filters.numberOfPage;
+export const getPageNumber = (state) => state.filters.pageNumber;
