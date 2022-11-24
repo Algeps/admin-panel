@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { PAGE_SIZE } from 'src/features/PageAdmin/lib/pageAdmin.constants';
+import { PAGE_SIZE } from 'src/features/pageAdmin/lib/pageAdmin.constants';
 
 const getOrderList = (state) => state.orders.orders;
 const getFilters = (state) => state.filters;

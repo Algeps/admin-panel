@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import {
   getSortColumn,
   getDirection,
-} from 'src/features/PageAdmin/store/filters/filtersSelector';
-import { setFilter } from 'src/features/PageAdmin/store/filters/filtersSlice';
+} from 'src/features/pageAdmin/store/filters/filtersSelector';
+import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
 
 import styles from './OrderTableHeader.module.css';
 import stylesRow from '../RowMarkup.module.css';

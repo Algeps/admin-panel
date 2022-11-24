@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Pagination.module.css';
-import { PAGE_SIZE } from 'src/features/PageAdmin/lib/pageAdmin.constants';
-import { getPageNumber } from 'src/features/PageAdmin/store/filters/filtersSelector';
-import { setFilter } from 'src/features/PageAdmin/store/filters/filtersSlice';
+import { PAGE_SIZE } from 'src/features/pageAdmin/lib/pageAdmin.constants';
+import { getPageNumber } from 'src/features/pageAdmin/store/filters/filtersSelector';
+import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
 import {
   Button,
   ButtonSizeTypes,

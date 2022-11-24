@@ -9,8 +9,8 @@ import {
   Input,
 } from 'src/shared/components';
 import styles from './DropdownNumberPage.module.css';
-import { setFilter } from 'src/features/PageAdmin/store/filters/filtersSlice';
-import { getPageNumber } from 'src/features/PageAdmin/store/filters/filtersSelector';
+import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
+import { getPageNumber } from 'src/features/pageAdmin/store/filters/filtersSelector';
 
 const createHandleChange = (setter) => [
   ({ target: { value } }) => setter(value),
