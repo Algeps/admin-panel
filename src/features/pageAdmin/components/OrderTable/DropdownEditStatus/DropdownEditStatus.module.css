@@ -7,12 +7,9 @@
 
 .overlayItem {
   display: inline-flex;
-  left: 0;
-  bottom: 1.75rem;
-  width: 10rem;
+  height: 2rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
   cursor: pointer;
-  gap: 0.5rem;
   box-sizing: border-box;
 }
 

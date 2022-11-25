@@ -32,7 +32,6 @@
   position: absolute;
   background-color: transparent;
   border: none;
-  outline: 0;
 }
 
 .clearButton {
@@ -60,6 +59,7 @@
 
 .inputField:focus {
   outline: 0;
+  /* outline: 1px solid var(--color-blue); */
 }
 
 .inputField::placeholder {

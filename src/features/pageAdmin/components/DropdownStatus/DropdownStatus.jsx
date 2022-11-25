@@ -48,7 +48,7 @@ const DropdownStatus = ({
       className={dropdownClass}
       trigger={
         <Input
-          type='button'
+          readOnly
           labelText='Статус заказа'
           postfix={
             <Icon iconName={'vArrow'} className={styles.iconInputPostfix} />

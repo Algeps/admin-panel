@@ -24,17 +24,11 @@ export const OrderTable = () => {
         setSelectedRows([...selectedRows, id]);
       }
     },
-    (id) => {
-      setSelectedRows(selectedRows.filter((e) => e !== id));
-    },
+    (id) => setSelectedRows(selectedRows.filter((e) => e !== id)),
   ];
   const [handleSelectedRows, handleSelectedRowsReset] = [
-    () => {
-      setSelectedRows(orders.map((e) => e.id));
-    },
-    () => {
-      setSelectedRows(init);
-    },
+    () => setSelectedRows(orders.map((e) => e.id)),
+    () => setSelectedRows(init),
   ];
 
   const handleDeleteRowsClick = () => {
