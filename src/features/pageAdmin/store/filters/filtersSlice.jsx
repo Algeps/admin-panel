@@ -7,7 +7,7 @@ const initialState = {
   amountFrom: '',
   amountTo: '',
   statuses: [],
-  sortColumn: 'date',
+  sortColumn: '',
   direction: 1,
   amount: '',
   pageNumber: 1,

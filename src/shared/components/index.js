@@ -11,3 +11,4 @@ export { TableHeaderCell } from './Table/TableHeaderCell/TableHeaderCell';
 export { TableRow } from './Table/TableRow/TableRow';
 export { TableBody } from './Table/TableBody/TableBody';
 export { TableFooter } from './Table/TableFooter/TableFooter';
+export { Radio } from './Radio/Radio';

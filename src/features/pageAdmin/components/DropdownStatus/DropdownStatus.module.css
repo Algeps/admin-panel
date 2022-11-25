@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+.overlayItemText {
+  color: var(--color-blue);
+}
+
 .overlay {
   top: 3.75rem;
   right: 0;

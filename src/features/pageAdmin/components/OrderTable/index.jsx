@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 
-import { deleteOrders } from '../../store/orders/ordersSlice';
+import {
+  deleteOrders,
+  changeStatusOrders,
+} from '../../store/orders/ordersSlice';
 import { getOrders } from '../../store/orders/ordersSelector';
 import { Table } from 'src/shared/components/';
 import { OrderTableHeader } from './OrderTableHeader/OrderTableHeader';
@@ -38,6 +41,10 @@ export const OrderTable = () => {
     dispatch(deleteOrders({ ids: selectedRows }));
   };
 
+  const handleStatusChange = (status) => {
+    dispatch(changeStatusOrders({ ids: selectedRows, status: status }));
+  };
+
   useEffect(() => {
     return () => {
       handleSelectedRowsReset();
@@ -47,7 +54,9 @@ export const OrderTable = () => {
   return (
     <Table>
       <OrderTableHeader
-        isAllRowsSelected={selectedRows.length === orders.length}
+        isAllRowsSelected={
+          selectedRows.length === orders.length && selectedRows.length > 0
+        }
         onSelectedRows={handleSelectedRows}
         onSelectedRowsReset={handleSelectedRowsReset}
       ></OrderTableHeader>
@@ -61,6 +70,7 @@ export const OrderTable = () => {
         onDeleteRowsClick={handleDeleteRowsClick}
         numberOfRow={numberOfRow}
         numberOfSelectedRows={selectedRows.length}
+        onStatusChange={handleStatusChange}
       ></OrderTableFooter>
     </Table>
   );
