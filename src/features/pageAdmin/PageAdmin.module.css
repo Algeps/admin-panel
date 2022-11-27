@@ -8,3 +8,9 @@
   margin: auto;
   box-sizing: border-box;
 }
+
+.tableNotBreak {
+  overflow-x: auto;
+  min-width: 68rem;
+  height: 100%;
+}
