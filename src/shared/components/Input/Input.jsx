@@ -41,7 +41,7 @@ export const Input = ({
 
   const lockIconClass = classNames(
     styles.insideArea,
-    styles.insideAreaPostfix,
+    styles.postfix,
     styles.iconTargetDisabled
   );
 

@@ -11,6 +11,7 @@ import {
 } from 'src/shared/components';
 import { DropdownStatusContainer } from '../DropdownStatus/DropdownStatus';
 import styles from './Filter.module.css';
+import { createHandleChangeAndReset } from 'src/shared/utils';
 
 const orderStatusSwitch = {
   new: false,
@@ -36,21 +37,16 @@ export const FilterContainer = () => {
     setIsOpen((current) => !current);
   };
 
-  const createHandleChange = (setter) => [
-    ({ target: { value } }) => setter(value),
-    () => setter(''),
-  ];
-
   const [handleMainSearchChange, handleMainSearchReset] =
-    createHandleChange(setMainSearch);
+    createHandleChangeAndReset(setMainSearch);
   const [handleStartDateChange, handleStartDateReset] =
-    createHandleChange(setStartDate);
+    createHandleChangeAndReset(setStartDate);
   const [handleEndDateChange, handleEndDateReset] =
-    createHandleChange(setEndDate);
+    createHandleChangeAndReset(setEndDate);
   const [handleStartAmountChange, handleStartAmountReset] =
-    createHandleChange(setStartAmount);
+    createHandleChangeAndReset(setStartAmount);
   const [handleEndAmountChange, handleEndAmountReset] =
-    createHandleChange(setEndAmount);
+    createHandleChangeAndReset(setEndAmount);
   const [handleStatusChange, handleStatusReset] = [
     (status) => {
       statuses[status] = !statuses[status];

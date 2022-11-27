@@ -16,11 +16,11 @@ export const OrderTableFooter = ({
   return (
     <TableFooter className={styles._}>
       <div className={styles.group}>
+        <span className={styles.text}>
+          Выбранно записей: {numberOfSelectedRows}
+        </span>
         {numberOfSelectedRows > 0 && (
           <>
-            <span className={styles.text}>
-              Выбранно записей: {numberOfSelectedRows}
-            </span>
             <DropdownEditStatus onStatusChange={onStatusChange} />
             <DropdownDeleteRow
               numberOfSelectedRows={numberOfSelectedRows}

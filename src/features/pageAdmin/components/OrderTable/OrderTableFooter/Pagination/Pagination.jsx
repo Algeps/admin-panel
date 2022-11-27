@@ -38,6 +38,15 @@ const getMassiveOfNumbers = (numberOfElements, currentNumber) => {
       ELLIPSIS,
       numberOfElements
     );
+  } else if (currentNumber >= 4 && currentNumber < numberOfElements - 1) {
+    temp.push(
+      1,
+      ELLIPSIS,
+      numberOfElements - 3,
+      numberOfElements - 2,
+      numberOfElements - 1,
+      numberOfElements
+    );
   } else {
     temp.push(
       1,

@@ -30,7 +30,7 @@ export const DropdownEditStatus = ({ className, onStatusChange }) => {
               setSelectedStatus(key);
             }}
             className={styles.hiddenInput}
-            name='status'
+            name='statusFooterTable'
           />
           <span>{value}</span>
         </label>

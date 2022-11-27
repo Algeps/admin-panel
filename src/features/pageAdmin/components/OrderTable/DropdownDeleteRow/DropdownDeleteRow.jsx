@@ -28,7 +28,7 @@ export const DropdownDeleteRow = ({
       >
         <span>Удалить</span>
       </Button>
-      {isOpen && numberOfSelectedRows !== 0 && (
+      {isOpen && numberOfSelectedRows > 0 && (
         <div className={classNames(styles.overlay)}>
           <span>Удалить {numberOfSelectedRows} записей?</span>
           <Button

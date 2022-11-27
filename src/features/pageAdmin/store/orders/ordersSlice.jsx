@@ -17,8 +17,12 @@ const ordersSlice = createSlice({
         ids.includes(e.id) ? { ...e, status } : e
       );
     },
+    updateOrder(state, { payload: { order } }) {
+      state.orders[state.orders.findIndex((e) => e.id === order.id)] = order;
+    },
   },
 });
 
-export const { deleteOrders, changeStatusOrders } = ordersSlice.actions;
+export const { deleteOrders, changeStatusOrders, updateOrder } =
+  ordersSlice.actions;
 export const ordersReducer = ordersSlice.reducer;
