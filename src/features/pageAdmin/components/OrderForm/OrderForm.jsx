@@ -26,6 +26,11 @@ import {
   getCorrectDisplayRuSum,
 } from 'src/shared/utils';
 
+const CORRECT_MAP = {
+  code: true,
+  customer: true,
+};
+
 const CONFIRMATION_CODE = '000';
 
 const checkingConfirmationCode = (code) =>
@@ -47,11 +52,21 @@ export const OrderForm = ({
   const [confirmationCode, setConfirmationCode] = useState('');
   const [handleConfirmationCodeChange, handleConfirmationCodeReset] =
     createHandleChangeAndReset(setConfirmationCode);
-  const [correctConfirmationCode, setCorrectConfirmationCode] = useState(true);
-  const handleCorrectConfirmationCode = (code) => {
-    const res = checkingConfirmationCode(code);
-    setCorrectConfirmationCode(() => res);
-    return res;
+  const [correct, setCorrect] = useState(CORRECT_MAP);
+  const handleError = ({ code, customer }) => {
+    const correctCode = checkingConfirmationCode(code);
+    const correctCustomer = customer.length > 0 && /[а-яА-ЯЁё]/.test(customer);
+    setCorrect(() => ({ customer: correctCustomer, code: correctCode }));
+    return correctCode && correctCustomer;
+  };
+  const getTextError = () => {
+    if (!correct.customer && !correct.code) {
+      return 'Неверное ФИО и код потверждения!';
+    } else if (!correct.code) {
+      return 'Неверный код подтверждения!';
+    } else {
+      return 'Поле ФИО должно содержать кирилицу!';
+    }
   };
 
   const [isOpenDropdownClose, setIsOpenDropdownClose] = useState(false);
@@ -111,6 +126,7 @@ export const OrderForm = ({
             value={customer}
             onChange={handleCustomerChange}
             onReset={handleCustomerReset}
+            incorrect={!correct.customer}
           />
           <Table className={styles.table}>
             <TableHeader>
@@ -217,19 +233,17 @@ export const OrderForm = ({
             value={confirmationCode}
             onChange={handleConfirmationCodeChange}
             onReset={handleConfirmationCodeReset}
-            incorrect={!correctConfirmationCode}
+            incorrect={!correct.code}
           />
         </div>
         <div className={styles.footer}>
-          {!correctConfirmationCode && (
-            <span className={styles.footerErrorText}>
-              Неверный код подтверждения!
-            </span>
+          {!Object.values(correct).reduce((acc, current) => acc && current) && (
+            <span className={styles.footerErrorText}>{getTextError()}</span>
           )}
           <Button
             nameIcon='checkmark'
             onClick={() => {
-              if (handleCorrectConfirmationCode(confirmationCode)) {
+              if (handleError({ customer, code: confirmationCode })) {
                 onEditOrderClick(cloneSelectOrder);
                 onCloseEditFormClick();
               }
