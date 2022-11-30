@@ -12,5 +12,6 @@
 .tableNotBreak {
   overflow-x: auto;
   min-width: 68rem;
+  min-height: 10rem;
   height: 100%;
 }

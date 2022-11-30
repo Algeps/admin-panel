@@ -18,6 +18,7 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilter(state, { payload: { key, value } }) {
+      state.pageNumber = 1;
       state[key] = value;
     },
     resetAllFilters() {
