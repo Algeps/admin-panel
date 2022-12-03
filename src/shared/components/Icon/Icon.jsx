@@ -29,7 +29,7 @@ const icons = {
   search: IcoSearch,
   sun: IcoSun,
   vArrow: IcoVArrow,
-  x_large: IcoXLarge,
+  xLarge: IcoXLarge,
   xMedium: IcoXMedium,
 };
 

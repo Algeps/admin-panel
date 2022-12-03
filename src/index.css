@@ -8,6 +8,7 @@
   --color-scrollbar-track: rgba(0, 0, 0, 0.1);
   --color-scrollbar-thumb: rgba(0, 0, 0, 0.34);
   --color-hover: rgba(0, 0, 0, 0.15);
+  --color-active: rgba(0, 0, 0, 0.15);
   --color-green: #0fb864;
 
   --color-status-new: #ff8c56;
@@ -16,6 +17,8 @@
   --color-status-postponed: #ff8c56;
   --color-status-completed: #0fb864;
   --color-status-canceled: #000000;
+
+  --color-selected-row: #ebf0f5;
 }
 
 * {
