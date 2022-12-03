@@ -1,10 +1,22 @@
 import Header from './components/Header/Header';
 import { FilterContainer } from './components/Filter/Filter';
 import { ORDER_STATUSES } from './lib/orderStatus';
+import { ORDER_STATUSES_ICON } from './lib/orderStatusIcon';
+import { ORDERS } from './mocks/orders';
 
 import './index.css';
 import { createContext, useState } from 'react';
+import { OrderTable } from './components/OrderTable';
 export const FilterContext = createContext('');
+
+const orderStatusSwitch = {
+  new: false,
+  calculation: false,
+  confirmed: false,
+  postponed: false,
+  completed: false,
+  canceled: false,
+};
 
 const PageAdmin = () => {
   const [mainSearch, setMainSearch] = useState('');
@@ -12,15 +24,9 @@ const PageAdmin = () => {
   const [endDate, setEndDate] = useState('');
   const [startAmount, setStartAmount] = useState('5000');
   const [endAmount, setEndAmount] = useState('');
-  const [statuses, setStatuses] = useState({
-    new: false,
-    calculating: false,
-    confirm: false,
-    postponed: false,
-    done: false,
-    canceled: false,
-  });
+  const [statuses, setStatuses] = useState(orderStatusSwitch);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [pageNumber, setPageNumber] = useState('');
 
   const createHandleChange = (setter) => [
     ({ target: { value } }) => setter(value),
@@ -41,6 +47,9 @@ const PageAdmin = () => {
 
   const [handleEndAmountChange, handleEndAmountReset] =
     createHandleChange(setEndAmount);
+
+  const [handlePageNumberChange, handlePageNumberReset] =
+    createHandleChange(setPageNumber);
 
   const [handleStatusChange, handleStatusReset] = [
     (status) => {
@@ -95,15 +104,21 @@ const PageAdmin = () => {
         onEndAmountReset: handleEndAmountReset,
         endAmount: endAmount,
         ORDER_STATUSES,
+        ORDER_STATUSES_ICON,
         onChangeStatusChoose: handleChangeStatusChoose,
         onStatusChange: handleStatusChange,
         statuses: statuses,
         onClearAllFilters: handleClearAllFilters,
+        ORDERS,
+        onPageNumberChange: handlePageNumberChange,
+        onPageNumberReset: handlePageNumberReset,
+        pageNumber: pageNumber,
       }}
     >
       <section className='section'>
         <Header />
         <FilterContainer />
+        <OrderTable />
       </section>
     </FilterContext.Provider>
   );

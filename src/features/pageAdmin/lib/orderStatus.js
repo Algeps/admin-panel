@@ -1,8 +1,8 @@
 export const ORDER_STATUSES = {
   new: 'Новый',
-  calculating: 'Рассчет',
-  confirm: 'Подтвержден',
+  calculation: 'Расчет',
+  confirmed: 'Подтвержден',
   postponed: 'Отложен',
-  done: 'Выполнен',
+  completed: 'Выполнен',
   canceled: 'Отменен',
 };

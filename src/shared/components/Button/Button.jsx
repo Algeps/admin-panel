@@ -19,9 +19,10 @@ export const Button = ({
   color = ButtonColorTypes.colorBlue,
   nameIcon = '',
   children,
+  className,
   ...props
 }) => {
-  const blockClass = classNames(styles._, {
+  const blockClass = classNames(styles._, className, {
     [styles.sizeBig]: size === ButtonSizeTypes.sizeBig,
     [styles.sizeSlim]: size === ButtonSizeTypes.sizeSlim,
 

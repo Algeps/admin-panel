@@ -1,0 +1,8 @@
+._ {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: none;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+}

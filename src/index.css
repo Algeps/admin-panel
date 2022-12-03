@@ -10,12 +10,12 @@
   --color-hover: rgba(0, 0, 0, 0.15);
   --color-green: #0fb864;
 
-  --color-status-icon-new: #ff8c56;
-  --color-status-icon-calculation: #459df5;
-  --color-status-access: #0fb864;
-  --color-status-icon-postpone: #ff8c56;
-  --color-status-icon-done: #0fb864;
-  --color-status-icon-cancel: #000000;
+  --color-status-new: #ff8c56;
+  --color-status-calculation: #459df5;
+  --color-status-confirmed: #0fb864;
+  --color-status-postponed: #ff8c56;
+  --color-status-completed: #0fb864;
+  --color-status-canceled: #000000;
 }
 
 * {

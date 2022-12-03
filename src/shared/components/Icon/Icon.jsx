@@ -33,10 +33,12 @@ const icons = {
   xMedium: IcoXMedium,
 };
 
-export const Icon = ({ className, iconName }) => {
+export const Icon = ({ className, iconName, ...props }) => {
   const IconComponent = icons[iconName];
   if (!IconComponent) {
     return null;
   }
-  return <IconComponent className={classNames(styles._, className)} />;
+  return (
+    <IconComponent className={classNames(styles._, className)} {...props} />
+  );
 };
