@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import {
   getSortColumn,
   getDirection,
-} from 'src/features/PageAdmin/store/filters/filtersSelector';
-import { setFilter } from 'src/features/PageAdmin/store/filters/filtersSlice';
+} from 'src/features/pageAdmin/store/filters/filtersSelector';
+import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
 
 import styles from './OrderTableHeader.module.css';
 import stylesRow from '../RowMarkup.module.css';
@@ -33,9 +33,8 @@ export const OrderTableHeader = () => {
 
   const handleSortColumn = (column) => {
     sortColumn === column
-      ? dispatch(setFilter({ key: 'direction', value: -direction }))
-      : dispatch(setFilter({ key: 'direction', value: 1 }));
-    dispatch(setFilter({ key: 'sortColumn', value: column }));
+      ? dispatch(setFilter({ sortColumn: column, direction: -direction }))
+      : dispatch(setFilter({ sortColumn: column, direction: 1 }));
   };
   return (
     <TableHeader>

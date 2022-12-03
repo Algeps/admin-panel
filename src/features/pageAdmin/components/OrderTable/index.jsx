@@ -7,12 +7,12 @@ import { OrderTableBody } from './OrderTableBody/OrderTableBody';
 import { OrderTableFooter } from './OrderTableFooter/OrderTableFooter';
 
 export const OrderTable = () => {
-  const [orders, numberOfRow] = useSelector(getOrders);
+  const { orders, numberOfRows } = useSelector(getOrders);
   return (
     <Table>
-      <OrderTableHeader></OrderTableHeader>
-      <OrderTableBody orders={orders}></OrderTableBody>
-      <OrderTableFooter numberOfRow={numberOfRow}></OrderTableFooter>
+      <OrderTableHeader />
+      <OrderTableBody orders={orders} />
+      <OrderTableFooter numberOfRow={numberOfRows} />
     </Table>
   );
 };

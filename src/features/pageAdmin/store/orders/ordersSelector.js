@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { PAGE_SIZE } from 'src/features/PageAdmin/lib/pageAdmin.constants';
+import { PAGE_SIZE } from 'src/features/pageAdmin/PageAdmin.constants';
 
 const getOrderList = (state) => state.orders.orders;
 const getFilters = (state) => state.filters;
@@ -13,15 +13,15 @@ export const getOrders = createSelector(
     const amountTo = Number(filters.amountTo);
 
     const temp = orders.filter(
-      (e) =>
-        filteringBySum(Number(e.sum), amountFrom, amountTo) &&
-        filteringByDate(e.date, dateFrom, dateTo) &&
-        filteringByOrderNumber(e.orderNumber, filters.mainSearch) &&
-        filteringByFullName(e.customer, filters.mainSearch) &&
-        filteringByStatus(e.status, filters.statuses)
+      (order) =>
+        filteringBySum(Number(order.sum), amountFrom, amountTo) &&
+        filteringByDate(order.date, dateFrom, dateTo) &&
+        filteringByOrderNumber(order.orderNumber, filters.mainSearch) &&
+        filteringByFullName(order.customer, filters.mainSearch) &&
+        filteringByStatus(order.status, filters.statuses)
     );
-    temp.sort((e1, e2) => sortingByField(e1, e2, filters));
-    return [pagination(temp, filters), temp.length];
+    temp.sort((order1, order2) => sortingByField(order1, order2, filters));
+    return { orders: pagination(temp, filters), numberOfRows: temp.length };
   }
 );
 
@@ -31,13 +31,13 @@ const pagination = (orders, filters) => {
   return orders.slice(begin, end);
 };
 
-const sortingByField = (e1, e2, filters) => {
+const sortingByField = (order1, order2, filters) => {
   if (filters.sortColumn === 'date' || filters.sortColumn === 'status') {
-    return e1[filters.sortColumn] > e2[filters.sortColumn]
+    return order1[filters.sortColumn] > order2[filters.sortColumn]
       ? -filters.direction
       : filters.direction;
   }
-  return Number(e1[filters.sortColumn]) > Number(e2[filters.sortColumn])
+  return Number(order1[filters.sortColumn]) > Number(order2[filters.sortColumn])
     ? -filters.direction
     : filters.direction;
 };
@@ -66,7 +66,7 @@ const filteringByDate = (date, min, max) => {
 };
 
 const convertToCorrectDate = (value) => {
-  value = value.split('.');
-  value = Date.parse(`${value[2]}.${value[1]}.${value[0]}`);
+  const [date, month, year] = value.split('.');
+  value = Date.parse(`${date}.${month}.${year}`);
   return value;
 };

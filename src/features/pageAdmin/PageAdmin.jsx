@@ -1,5 +1,5 @@
 import Header from './components/Header/Header';
-import { FilterContainer } from './components/Filter/Filter';
+import { FilterContainer } from './components/Filter/FilterContainer';
 
 import styles from './PageAdmin.module.css';
 import { OrderTable } from './components/OrderTable';

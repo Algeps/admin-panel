@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ORDERS } from 'src/features/PageAdmin/mocks/orders';
+import { ORDERS } from 'src/features/pageAdmin/mocks/orders';
 
 const initialState = {
   orders: ORDERS,
