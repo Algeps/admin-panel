@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setFilter, resetAllFilters } from '../../store/filters/filtersSlice';
 import { Filter } from './Filter';
 
-const createHandleChange = (setter) => [
+const createHandleChangeAndReset = (setter) => [
   ({ target: { value } }) => setter(value),
   () => setter(''),
 ];
@@ -24,14 +24,15 @@ export const FilterContainer = () => {
   };
 
   const [handleMainSearchChange, handleMainSearchReset] =
-    createHandleChange(setMainSearch);
+    createHandleChangeAndReset(setMainSearch);
   const [handleDateFromChange, handleDateFromReset] =
-    createHandleChange(setDateFrom);
-  const [handleDateToChange, handleDateToReset] = createHandleChange(setDateTo);
+    createHandleChangeAndReset(setDateFrom);
+  const [handleDateToChange, handleDateToReset] =
+    createHandleChangeAndReset(setDateTo);
   const [handleAmountFromChange, handleAmountFromReset] =
-    createHandleChange(setAmountFrom);
+    createHandleChangeAndReset(setAmountFrom);
   const [handleAmountToChange, handleAmountToReset] =
-    createHandleChange(setAmountTo);
+    createHandleChangeAndReset(setAmountTo);
 
   const handleStatusChange = (status) => {
     statuses.includes(status)

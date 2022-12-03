@@ -8,7 +8,7 @@ const STATUS_ICON = {
   canceled: 'abort',
 };
 
-export const StatusTableCell = ({ status, className }) => {
+export const StatusTableCell = ({ status, className, ...props }) => {
   const blockClassName = classNames(className, {
     [styles.new]: status === 'new',
     [styles.calculation]: status == 'calculation',
@@ -18,7 +18,7 @@ export const StatusTableCell = ({ status, className }) => {
     [styles.canceled]: status === 'canceled',
   });
   return (
-    <TableCell className={blockClassName}>
+    <TableCell className={blockClassName} {...props}>
       <Icon iconName={STATUS_ICON[status] || 'dot'}></Icon>
       {ORDER_STATUSES[status]}
     </TableCell>

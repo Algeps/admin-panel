@@ -20,23 +20,18 @@ export const OrderTableBody = ({
   onSelectedRow = noop,
   onSelectedRowReset = noop,
   selectedRows = [],
-  onEditOrderClick = noop,
 }) => {
-  const [selectOrder, setSelectOrder] = useState({});
-  const [isOpenForm, setIsOpenForm] = useState(false);
+  const [selectOrder, setSelectOrder] = useState(null);
+
   const handleClickRow = (order) => {
     setSelectOrder(order);
-    setIsOpenForm((val) => !val);
-  };
-  const handleCloseEditFormClick = () => {
-    setIsOpenForm((val) => !val);
   };
 
-  const handleChecked = (id) => {
-    return ({ target: { checked } }) => {
+  const handleChecked =
+    (id) =>
+    ({ target: { checked } }) => {
       return checked ? onSelectedRow(id) : onSelectedRowReset(id);
     };
-  };
 
   return (
     <>
@@ -47,23 +42,26 @@ export const OrderTableBody = ({
             className={classNames(styles.row, {
               [styles.selected]: selectedRows.includes(order.id),
             })}
-            onClick={() => handleClickRow(order)}
           >
-            <TableCell className={stylesRow.headerCell}>
-              <Checkbox
-                checked={selectedRows.includes(order.id)}
-                onChange={handleChecked(order.id)}
-              />
+            <TableCell>
+              <label className={stylesRow.headerCell}>
+                <Checkbox
+                  checked={selectedRows.includes(order.id)}
+                  onChange={handleChecked(order.id)}
+                />
+              </label>
             </TableCell>
 
             <TableCell
               className={classNames(stylesRow.headerCell, stylesRow.id)}
+              onClick={() => handleClickRow(order.id)}
             >
               {order.orderNumber}
             </TableCell>
 
             <TableCell
               className={classNames(stylesRow.headerCell, stylesRow.date)}
+              onClick={() => handleClickRow(order.id)}
             >
               {getRuDateTimeFormat(order.date)}
             </TableCell>
@@ -71,34 +69,34 @@ export const OrderTableBody = ({
             <StatusTableCell
               status={order.status}
               className={classNames(stylesRow.headerCell, stylesRow.status)}
+              onClick={() => handleClickRow(order.id)}
             ></StatusTableCell>
 
             <TableCell
               className={classNames(stylesRow.headerCell, stylesRow.positions)}
+              onClick={() => handleClickRow(order.id)}
             >
               {order.amount}
             </TableCell>
 
             <TableCell
               className={classNames(stylesRow.headerCell, stylesRow.sum)}
+              onClick={() => handleClickRow(order.id)}
             >
               {getCorrectDisplayRuSum(String(order.sum))}
             </TableCell>
 
             <TableCell
               className={classNames(stylesRow.headerCell, stylesRow.fullName)}
+              onClick={() => handleClickRow(order.id)}
             >
               {order.customer}
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
-      {isOpenForm && (
-        <OrderForm
-          selectOrder={selectOrder}
-          onEditOrderClick={onEditOrderClick}
-          onCloseEditFormClick={handleCloseEditFormClick}
-        />
+      {selectOrder && (
+        <OrderForm selectOrder={selectOrder} onSelectedRow={handleClickRow} />
       )}
     </>
   );

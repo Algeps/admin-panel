@@ -12,7 +12,7 @@ import styles from './DropdownNumberPage.module.css';
 import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
 import { getPageNumber } from 'src/features/pageAdmin/store/filters/filtersSelector';
 
-const createHandleChange = (setter) => [
+const createHandleChangeAndReset = (setter) => [
   ({ target: { value } }) => setter(value),
   () => setter(''),
 ];
@@ -23,7 +23,7 @@ export const DropdownNumberPage = ({ className }) => {
   const [pageNumber, setPageNumber] = useState(currentNumberPage);
   const [isOpen, setIsOpen] = useState(false);
   const [onPageNumberChange, onPageNumberReset] =
-    createHandleChange(setPageNumber);
+    createHandleChangeAndReset(setPageNumber);
 
   const toggleDropdown = () => {
     setIsOpen((val) => !val);

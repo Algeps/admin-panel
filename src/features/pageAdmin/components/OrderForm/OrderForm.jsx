@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { updateOrder } from 'src/features/pageAdmin/store/orders/ordersSlice';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
 import styles from './OrderForm.module.css';
@@ -21,11 +23,8 @@ import {
 import { ORDER_STATUSES } from '../../lib/orderStatus';
 import { LOYALITY } from '../../lib/loyality';
 import { getRuDateTimeFormat, getCorrectDisplayRuSum } from 'src/shared/utils';
-
-const CORRECT_MAP = {
-  code: true,
-  customer: true,
-};
+import { useSelector } from 'react-redux';
+import { getOrderById } from '../../store/orders/ordersSelector';
 
 const createHandleChangeAndReset = (setter) => [
   ({ target: { value } }) => setter(value),
@@ -33,80 +32,72 @@ const createHandleChangeAndReset = (setter) => [
 ];
 
 const CONFIRMATION_CODE = '000';
+const checkingConfirmationCode = (code) => CONFIRMATION_CODE === code;
+const checkingCustomer = (customer) => customer.length > 0;
 
-const checkingConfirmationCode = (code) =>
-  CONFIRMATION_CODE === code ? true : false;
+export const OrderForm = ({ selectOrder, onSelectedRow }) => {
+  const dispatch = useDispatch();
+  const order = useSelector(getOrderById(selectOrder));
 
-export const OrderForm = ({
-  selectOrder,
-  onEditOrderClick,
-  onCloseEditFormClick,
-}) => {
-  const cloneSelectOrder = {};
-  Object.assign(cloneSelectOrder, selectOrder);
-
-  const [customer, setCustomer] = useState(selectOrder.customer);
-  const [handleCustomerChange, handleCustomerReset] =
-    createHandleChangeAndReset(setCustomer);
-  const [selectedStatus, setSelectedStatus] = useState(cloneSelectOrder.status);
-
+  const [customer, setCustomer] = useState(order.customer);
+  const [status, setStatus] = useState(order.status);
   const [confirmationCode, setConfirmationCode] = useState('');
+  const [isOpenDropdownClose, setIsOpenDropdownClose] = useState(false);
+  const isChange = order.customer !== customer || order.status !== status;
+  const confirmationCodeCorrect = checkingConfirmationCode(confirmationCode);
+  const customerCorrect = checkingCustomer(customer);
+
+  const [handleCustomerChange, handleCustomerReset] = [
+    ({ target: { value } }) => setCustomer(value),
+    () => setCustomer(''),
+  ];
   const [handleConfirmationCodeChange, handleConfirmationCodeReset] =
     createHandleChangeAndReset(setConfirmationCode);
-  const [correct, setCorrect] = useState(CORRECT_MAP);
-  const handleError = ({ code, customer }) => {
-    const correctCode = checkingConfirmationCode(code);
-    const correctCustomer = customer.length > 0 && /[а-яА-ЯЁё]/.test(customer);
-    setCorrect(() => ({ customer: correctCustomer, code: correctCode }));
-    return correctCode && correctCustomer;
-  };
-  const getTextError = () => {
-    if (!correct.customer && !correct.code) {
-      return 'Неверное ФИО и код потверждения!';
-    } else if (!correct.code) {
-      return 'Неверный код подтверждения!';
-    } else {
-      return 'Поле ФИО должно содержать кирилицу!';
-    }
-  };
-
-  const [isOpenDropdownClose, setIsOpenDropdownClose] = useState(false);
   const handleOpenDropdownClose = () => {
     setIsOpenDropdownClose((val) => !val);
   };
 
-  cloneSelectOrder.customer = customer;
-  cloneSelectOrder.status = selectedStatus;
-  const isChange =
-    cloneSelectOrder.customer !== selectOrder.customer ||
-    cloneSelectOrder.status !== selectOrder.status;
+  let textError = '';
+  if (!confirmationCodeCorrect && !customerCorrect) {
+    textError = 'Неверное ФИО и код подтверждения!';
+  } else if (!confirmationCodeCorrect && confirmationCode.length > 0) {
+    textError = 'Неверный код подтверждения!';
+  } else if (!checkingCustomer) {
+    textError = 'Поле ФИО должно быть заполнено!';
+  }
+
+  const handleSaveClick = () => {
+    if (confirmationCodeCorrect && customerCorrect) {
+      dispatch(updateOrder({ ...order, customer, status }));
+      onSelectedRow(null);
+    }
+  };
   return (
     <div className={styles.freeze}>
       <div className={styles._}>
         <div className={styles.header}>
-          <span>Заявка #{cloneSelectOrder.orderNumber}</span>
+          <span>Заявка #{order.orderNumber}</span>
           <div className={styles.dropdownClose}>
             <Button
               nameIcon='xLarge'
               size={ButtonSizeTypes.sizeSlim}
               onClick={() =>
-                isChange ? handleOpenDropdownClose() : onCloseEditFormClick()
+                isChange ? handleOpenDropdownClose() : onSelectedRow(null)
               }
             ></Button>
-            {isOpenDropdownClose && isChange && (
+            {isOpenDropdownClose && (
               <div className={styles.dropdownCloseOverlay}>
                 <span>Есть несохраненные изменения</span>
                 <Button
                   size={ButtonSizeTypes.sizeSlim}
                   color={ButtonColorTypes.colorClearBlue}
-                  onClick={() => onCloseEditFormClick()}
+                  onClick={() => onSelectedRow(null)}
                 >
                   <span>Сбросить</span>
                 </Button>
                 <Button
                   size={ButtonSizeTypes.sizeSlim}
                   onClick={() => {
-                    Object.assign(cloneSelectOrder, selectOrder);
                     handleOpenDropdownClose();
                   }}
                 >
@@ -119,7 +110,7 @@ export const OrderForm = ({
         <div className={styles.body}>
           <Input
             labelText='Дата и время заказа'
-            value={getRuDateTimeFormat(cloneSelectOrder.date)}
+            value={getRuDateTimeFormat(order.date)}
             disabled
           />
           <Input
@@ -127,7 +118,7 @@ export const OrderForm = ({
             value={customer}
             onChange={handleCustomerChange}
             onReset={handleCustomerReset}
-            incorrect={!correct.customer}
+            incorrect={!customerCorrect}
           />
           <Table className={styles.table}>
             <TableHeader>
@@ -156,7 +147,7 @@ export const OrderForm = ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {cloneSelectOrder.order.map((e) => (
+              {order.order.map((e) => (
                 <TableRow key={e.vendorCode}>
                   <TableCell
                     className={classNames(
@@ -187,21 +178,19 @@ export const OrderForm = ({
             </TableBody>
             <TableFooter className={styles.tableFooter}>
               <span>Итоговая сумма:</span>
-              <span>
-                {getCorrectDisplayRuSum(String(cloneSelectOrder.sum))}
-              </span>
+              <span>{getCorrectDisplayRuSum(String(order.sum))}</span>
             </TableFooter>
           </Table>
           <Input
             labelText='Уровень лояльности'
-            value={LOYALITY[cloneSelectOrder.loyality]}
+            value={LOYALITY[order.loyality]}
             disabled
           />
           <Dropdown
             trigger={
               <Input
                 labelText='Статус заказа'
-                value={ORDER_STATUSES[cloneSelectOrder.status]}
+                value={ORDER_STATUSES[status]}
                 postfix={
                   <Icon
                     iconName={'vArrow'}
@@ -215,14 +204,14 @@ export const OrderForm = ({
               <label
                 key={key}
                 className={classNames(styles.statusOverlayItem, {
-                  [styles.statusOverlayItemSelected]: selectedStatus === key,
+                  [styles.statusOverlayItemSelected]: status === key,
                 })}
               >
                 <Radio
                   id={key}
                   className={styles.hiddenInput}
                   name='statusEditForm'
-                  onChange={() => setSelectedStatus(key)}
+                  onChange={() => setStatus(key)}
                 />
                 <span>{value}</span>
               </label>
@@ -234,22 +223,14 @@ export const OrderForm = ({
             value={confirmationCode}
             onChange={handleConfirmationCodeChange}
             onReset={handleConfirmationCodeReset}
-            incorrect={!correct.code}
+            incorrect={!confirmationCodeCorrect}
           />
         </div>
         <div className={styles.footer}>
-          {!Object.values(correct).reduce((acc, current) => acc && current) && (
-            <span className={styles.footerErrorText}>{getTextError()}</span>
+          {textError && (
+            <span className={styles.footerErrorText}>{textError}</span>
           )}
-          <Button
-            nameIcon='checkmark'
-            onClick={() => {
-              if (handleError({ customer, code: confirmationCode })) {
-                onEditOrderClick(cloneSelectOrder);
-                onCloseEditFormClick();
-              }
-            }}
-          >
+          <Button nameIcon='checkmark' onClick={handleSaveClick}>
             <span>Сохранить</span>
           </Button>
         </div>

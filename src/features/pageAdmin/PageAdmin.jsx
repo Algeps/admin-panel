@@ -9,9 +9,7 @@ export const PageAdmin = () => {
     <section className={styles.section}>
       <Header />
       <FilterContainer />
-      <div className={styles.tableNotBreak}>
-        <OrderTable />
-      </div>
+      <OrderTable />
     </section>
   );
 };

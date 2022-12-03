@@ -4,6 +4,11 @@ import { PAGE_SIZE } from 'src/features/pageAdmin/PageAdmin.constants';
 const getOrderList = (state) => state.orders.orders;
 const getFilters = (state) => state.filters;
 
+export const getOrderById = (id) =>
+  createSelector([getOrderList], (orders) =>
+    orders.find((order) => order.id === id)
+  );
+
 export const getOrders = createSelector(
   [getOrderList, getFilters],
   (orders, filters) => {

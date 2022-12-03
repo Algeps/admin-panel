@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   deleteOrders,
   changeStatusOrders,
-  updateOrder,
 } from '../../store/orders/ordersSlice';
 import { getOrders } from '../../store/orders/ordersSelector';
 import { Table } from 'src/shared/components/';
@@ -40,10 +39,6 @@ export const OrderTable = () => {
     dispatch(changeStatusOrders({ ids: selectedRows, status: status }));
   };
 
-  const handleEditOrderClick = (order) => {
-    dispatch(updateOrder({ order }));
-  };
-
   useEffect(() => {
     return () => {
       handleSelectedRowsReset();
@@ -64,7 +59,6 @@ export const OrderTable = () => {
         orders={orders}
         onSelectedRow={handleSelectedRow}
         onSelectedRowReset={handleSelectedRowReset}
-        onEditOrderClick={handleEditOrderClick}
       />
       <OrderTableFooter
         onDeleteRowsClick={handleDeleteRowsClick}

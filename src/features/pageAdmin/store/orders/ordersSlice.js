@@ -17,7 +17,7 @@ const ordersSlice = createSlice({
         ids.includes(e.id) ? { ...e, status } : e
       );
     },
-    updateOrder(state, { payload: { order } }) {
+    updateOrder(state, { payload: order }) {
       state.orders[state.orders.findIndex((e) => e.id === order.id)] = order;
     },
   },
