@@ -1,6 +1,7 @@
 import styles from './OrderTableFooter.module.css';
 import classNames from 'classnames';
 
+
 import { Button, TableFooter, ButtonSizeTypes } from 'src/shared/components';
 import { DropdownDeleteRow } from '../DropdownDeleteRow/DropdownDeleteRow';
 import { Pagination } from './Pagination/Pagination';

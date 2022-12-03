@@ -17,6 +17,7 @@ const createHandleChange = (setter) => [
   () => setter(''),
 ];
 
+
 export const DropdownNumberPage = ({ className }) => {
   const dispatch = useDispatch();
   const currentNumberPage = useSelector(getPageNumber);
