@@ -1,3 +1,5 @@
+export const RUB = '\u{20BD}';
+
 export const getRuDateTimeFormat = (date) => {
   return new Date(date).toLocaleString('ru-RU', {
     day: '2-digit',
@@ -8,13 +10,12 @@ export const getRuDateTimeFormat = (date) => {
   });
 };
 
-export const RUB = '\u{20BD}';
-
 export const getCorrectDisplayRuSum = (number) => {
-  return `${number.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')}  ${RUB}`;
+  return `${number
+    .split('')
+    .reverse()
+    .map((number, index) => (index % 3 === 0 ? number + ' ' : number))
+    .reverse()
+    .join('')
+    .trim()}  ${RUB}`;
 };
-
-export const createHandleChangeAndReset = (setter) => [
-  ({ target: { value } }) => setter(value),
-  () => setter(''),
-];

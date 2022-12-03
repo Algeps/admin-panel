@@ -30,7 +30,7 @@ export const DropdownNumberPage = ({ className }) => {
   };
 
   useEffect(() => {
-    dispatch(setFilter({ key: 'pageNumber', value: pageNumber }));
+    dispatch(setFilter({ pageNumber }));
   }, [pageNumber]);
 
   return (

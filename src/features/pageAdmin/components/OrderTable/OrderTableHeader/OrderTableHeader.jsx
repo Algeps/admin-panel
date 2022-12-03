@@ -43,9 +43,8 @@ export const OrderTableHeader = ({
 
   const handleSortColumn = (column) => {
     sortColumn === column
-      ? dispatch(setFilter({ key: 'direction', value: -direction }))
-      : dispatch(setFilter({ key: 'direction', value: 1 }));
-    dispatch(setFilter({ key: 'sortColumn', value: column }));
+      ? dispatch(setFilter({ sortColumn: column, direction: -direction }))
+      : dispatch(setFilter({ sortColumn: column, direction: 1 }));
   };
   return (
     <TableHeader>

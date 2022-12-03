@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Pagination.module.css';
-import { PAGE_SIZE } from 'src/features/pageAdmin/lib/pageAdmin.constants';
+import { PAGE_SIZE } from 'src/features/pageAdmin/PageAdmin.constants';
 import { getPageNumber } from 'src/features/pageAdmin/store/filters/filtersSelector';
 import { setFilter } from 'src/features/pageAdmin/store/filters/filtersSlice';
 import {
@@ -12,7 +12,7 @@ import {
 
 const ELLIPSIS = '...';
 
-const getMassiveOfNumbers = (numberOfElements, currentNumber) => {
+const getArrayOfNumbers = (numberOfElements, currentNumber) => {
   const temp = [];
   if (numberOfElements <= 5) {
     for (let i = 0; i < numberOfElements; ++i) {
@@ -64,29 +64,29 @@ export const Pagination = ({ className, numberOfRow }) => {
   const currentNumberPage = Number(useSelector(getPageNumber));
   const numberOfPage = Math.ceil(numberOfRow / PAGE_SIZE);
 
-  const massiveNumbers = getMassiveOfNumbers(numberOfPage, currentNumberPage);
-  const handleSwitchPageOnClick = (e) => {
-    dispatch(setFilter({ key: 'pageNumber', value: e }));
+  const pageNumbers = getArrayOfNumbers(numberOfPage, currentNumberPage);
+  const handleSwitchPageOnClick = (pageNumber) => {
+    dispatch(setFilter({ pageNumber }));
   };
   return (
     <div className={className}>
-      {massiveNumbers.map((e, index) =>
-        e != ELLIPSIS ? (
+      {pageNumbers.map((pageNumber, index) =>
+        pageNumber != ELLIPSIS ? (
           <Button
             key={index}
             size={ButtonSizeTypes.sizeSlim}
             color={
-              e === currentNumberPage
+              pageNumber === currentNumberPage
                 ? ButtonColorTypes.colorBlue
                 : ButtonColorTypes.colorClearBlue
             }
-            onClick={() => handleSwitchPageOnClick(e)}
+            onClick={() => handleSwitchPageOnClick(pageNumber)}
           >
-            <span>{e}</span>
+            <span>{pageNumber}</span>
           </Button>
         ) : (
           <span key={index} className={styles.elipsis}>
-            {e}
+            {pageNumber}
           </span>
         )
       )}

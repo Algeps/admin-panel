@@ -17,7 +17,7 @@ const init = [];
 
 export const OrderTable = () => {
   const dispatch = useDispatch();
-  const [orders, numberOfRow] = useSelector(getOrders);
+  const { orders, numberOfRows } = useSelector(getOrders);
   const [selectedRows, setSelectedRows] = useState(init);
   const [handleSelectedRow, handleSelectedRowReset] = [
     (id) => {
@@ -58,20 +58,20 @@ export const OrderTable = () => {
         }
         onSelectedRows={handleSelectedRows}
         onSelectedRowsReset={handleSelectedRowsReset}
-      ></OrderTableHeader>
+      />
       <OrderTableBody
         selectedRows={selectedRows}
         orders={orders}
         onSelectedRow={handleSelectedRow}
         onSelectedRowReset={handleSelectedRowReset}
         onEditOrderClick={handleEditOrderClick}
-      ></OrderTableBody>
+      />
       <OrderTableFooter
         onDeleteRowsClick={handleDeleteRowsClick}
-        numberOfRow={numberOfRow}
+        numberOfRow={numberOfRows}
         numberOfSelectedRows={selectedRows.length}
         onStatusChange={handleStatusChange}
-      ></OrderTableFooter>
+      />
     </Table>
   );
 };

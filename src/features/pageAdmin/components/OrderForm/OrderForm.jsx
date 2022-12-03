@@ -20,16 +20,17 @@ import {
 } from 'src/shared/components';
 import { ORDER_STATUSES } from '../../lib/orderStatus';
 import { LOYALITY } from '../../lib/loyality';
-import {
-  getRuDateTimeFormat,
-  createHandleChangeAndReset,
-  getCorrectDisplayRuSum,
-} from 'src/shared/utils';
+import { getRuDateTimeFormat, getCorrectDisplayRuSum } from 'src/shared/utils';
 
 const CORRECT_MAP = {
   code: true,
   customer: true,
 };
+
+const createHandleChangeAndReset = (setter) => [
+  ({ target: { value } }) => setter(value),
+  () => setter(''),
+];
 
 const CONFIRMATION_CODE = '000';
 
