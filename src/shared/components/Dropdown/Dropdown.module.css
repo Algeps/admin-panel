@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.trigger {
+.trigger * {
   cursor: pointer;
 }
 

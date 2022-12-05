@@ -1,19 +1,12 @@
 import styles from './OrderTableBody.module.css';
-import { useContext } from 'react';
-import { FilterContext } from 'src/features/pageAdmin';
 import { TableBody } from 'src/shared/components';
 import { OrderTableBodyRow } from '../OrderTableBodyRow/OrderTableBodyRow';
 
-export const OrderTableBody = () => {
-  const { ORDERS } = useContext(FilterContext);
+export const OrderTableBody = ({ orders = {} }) => {
   return (
     <TableBody className={styles._}>
-      {ORDERS.map((order) => (
-        <OrderTableBodyRow
-          key={order.id}
-          date={Date.parse(order.date)}
-          {...order}
-        />
+      {orders.map((order) => (
+        <OrderTableBodyRow key={order.id} date={order.date} {...order} />
       ))}
     </TableBody>
   );

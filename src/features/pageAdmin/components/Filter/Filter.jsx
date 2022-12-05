@@ -1,83 +1,36 @@
 import classNames from 'classnames';
-import { useState } from 'react';
-import { FilterContext } from '../..';
-import { useContext } from 'react';
+
 import {
   Input,
   Button,
   ButtonColorTypes,
   Searchbar,
 } from 'src/shared/components';
-import { DropdownStatusContainer } from '../DropdownStatus/DropdownStatus';
+import { DropdownStatus } from '../DropdownStatus/DropdownStatus';
 import styles from './Filter.module.css';
 
-export const FilterContainer = () => {
-  const {
-    onMainSearchChange,
-    onMainSearchReset,
-    mainSearch,
-    onStartDateChange,
-    onStartDateReset,
-    startDate,
-    onEndDateChange,
-    onEndDateReset,
-    endDate,
-    onStartAmountChange,
-    onStartAmountReset,
-    startAmount,
-    onEndAmountChange,
-    onEndAmountReset,
-    endAmount,
-    onClearAllFilters,
-  } = useContext(FilterContext);
-  const [isOpen, setIsOpen] = useState(true);
-  const handleShowFilterButtonClick = () => {
-    setIsOpen((current) => !current);
-  };
-
-  return (
-    <Filter
-      onShowFilterButtonClick={handleShowFilterButtonClick}
-      isOpen={isOpen}
-      onMainSearchChange={onMainSearchChange}
-      onMainSearchReset={onMainSearchReset}
-      mainSearch={mainSearch}
-      onStartDateChange={onStartDateChange}
-      onStartDateReset={onStartDateReset}
-      startDate={startDate}
-      onEndDateChange={onEndDateChange}
-      onEndDateReset={onEndDateReset}
-      endDate={endDate}
-      onStartAmountChange={onStartAmountChange}
-      onStartAmountReset={onStartAmountReset}
-      startAmount={startAmount}
-      onEndAmountChange={onEndAmountChange}
-      onEndAmountReset={onEndAmountReset}
-      endAmount={endAmount}
-      onClearAllFilters={onClearAllFilters}
-    />
-  );
-};
-
-const Filter = ({
+export const Filter = ({
   onShowFilterButtonClick,
   isOpen,
   onMainSearchChange,
   onMainSearchReset,
   mainSearch,
-  onStartDateChange,
-  onStartDateReset,
-  startDate,
-  onEndDateChange,
-  onEndDateReset,
-  endDate,
-  onStartAmountChange,
-  onStartAmountReset,
-  startAmount,
-  onEndAmountChange,
-  onEndAmountReset,
-  endAmount,
-  onClearAllFilters,
+  onDateFromChange,
+  onDateFromReset,
+  dateFrom,
+  onDateToChange,
+  onDateToReset,
+  dateTo,
+  onAmountFromChange,
+  onAmountFromReset,
+  amountFrom,
+  onAmountToChange,
+  onAmountToReset,
+  amountTo,
+  onResetAllFiltersClick,
+  onStatusChange,
+  statuses,
+  onApplyFilterOnClick,
 }) => (
   <div className={styles._}>
     <div className={styles.main}>
@@ -102,7 +55,7 @@ const Filter = ({
         </Button>
         <Button
           color={ButtonColorTypes.colorClearBlue}
-          onClick={onClearAllFilters}
+          onClick={onResetAllFiltersClick}
         >
           <span>Сбросить фильтры</span>
         </Button>
@@ -122,21 +75,25 @@ const Filter = ({
             labelText='Дата оформления'
             placeholder='dd.mm.yyyy'
             prefix={<span>с</span>}
-            value={startDate}
-            onChange={onStartDateChange}
-            onReset={onStartDateReset}
+            value={dateFrom}
+            onChange={onDateFromChange}
+            onReset={onDateFromReset}
           />
           <Input
             className={styles.dataRegistration}
             placeholder='dd.mm.yyyy'
             prefix={<span>по</span>}
-            value={endDate}
-            onChange={onEndDateChange}
-            onReset={onEndDateReset}
+            value={dateTo}
+            onChange={onDateToChange}
+            onReset={onDateToReset}
           />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
-          <DropdownStatusContainer className={styles.orderStatus} />
+          <DropdownStatus
+            className={styles.orderStatus}
+            onStatusChange={onStatusChange}
+            statuses={statuses}
+          />
         </div>
         <div className={classNames(styles.group, styles.groupExtended)}>
           <Input
@@ -144,20 +101,23 @@ const Filter = ({
             className={styles.orderAmount}
             placeholder='₽'
             prefix={<span>от</span>}
-            value={startAmount}
-            onChange={onStartAmountChange}
-            onReset={onStartAmountReset}
+            value={amountFrom}
+            onChange={onAmountFromChange}
+            onReset={onAmountFromReset}
           />
           <Input
             className={styles.orderAmount}
             placeholder='₽'
             prefix={<span>до</span>}
-            value={endAmount}
-            onChange={onEndAmountChange}
-            onReset={onEndAmountReset}
+            value={amountTo}
+            onChange={onAmountToChange}
+            onReset={onAmountToReset}
           />
         </div>
-        <Button color={ButtonColorTypes.colorClearBlue}>
+        <Button
+          color={ButtonColorTypes.colorClearBlue}
+          onClick={onApplyFilterOnClick}
+        >
           <span>Применить</span>
         </Button>
       </div>
