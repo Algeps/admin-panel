@@ -1,0 +1,8 @@
+._ {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}

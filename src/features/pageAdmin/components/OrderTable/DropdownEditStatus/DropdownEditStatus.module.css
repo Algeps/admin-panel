@@ -1,0 +1,22 @@
+.overlay {
+  bottom: 1.75rem;
+  left: 0;
+  padding: 0.5rem 0 0.5rem 0;
+  width: 10rem;
+}
+
+.overlayItem {
+  display: inline-flex;
+  height: 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.selectItem {
+  color: var(--color-blue);
+}
+
+.hiddenInput {
+  display: none;
+}

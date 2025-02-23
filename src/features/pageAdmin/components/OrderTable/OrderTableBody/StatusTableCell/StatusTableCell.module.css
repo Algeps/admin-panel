@@ -1,0 +1,32 @@
+.new {
+  fill: var(--color-status-new);
+  stroke: var(--color-status-new);
+}
+
+.calculation {
+  fill: var(--color-status-calculation);
+  stroke: var(--color-status-calculation);
+}
+
+.confirmed {
+  fill: var(--color-status-confirmed);
+  stroke: var(--color-status-confirmed);
+}
+
+.postponed {
+  fill: var(--color-status-postponed);
+  stroke: var(--color-status-postponed);
+}
+
+.completed {
+  color: var(--color-status-completed);
+  fill: var(--color-status-completed);
+  stroke: var(--color-status-completed);
+  opacity: 0.5;
+}
+
+.canceled {
+  fill: var(--color-status-canceled);
+  stroke: var(--color-status-canceled);
+  opacity: 0.5;
+}

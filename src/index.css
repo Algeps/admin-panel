@@ -1,0 +1,56 @@
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-day-light-blue: #bad8f5;
+  --color-blue: #459df5;
+  --color-red: #f53152;
+  --color-light-grey: #ebf0f5;
+  --color-scrollbar-track: rgba(0, 0, 0, 0.1);
+  --color-scrollbar-thumb: rgba(0, 0, 0, 0.34);
+  --color-hover: rgba(0, 0, 0, 0.15);
+  --color-active: rgba(0, 0, 0, 0.15);
+  --color-green: #0fb864;
+
+  --color-status-new: #ff8c56;
+  --color-status-calculation: #459df5;
+  --color-status-confirmed: #0fb864;
+  --color-status-postponed: #ff8c56;
+  --color-status-completed: #0fb864;
+  --color-status-canceled: #000000;
+
+  --color-selected-row: #ebf0f5;
+}
+
+* {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+}
+
+body {
+  font-size: 13px;
+}
+
+/*ScrollBar*/
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.5rem 0.5rem var(--color-scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0.5rem 0.5rem var(--color-scrollbar-thumb);
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  border: solid 0.25rem transparent;
+}
