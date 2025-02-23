@@ -1,53 +1,24 @@
-import { Dropdown, Icon, Input, Checkbox } from 'src/shared/components';
-import { FilterContext } from '../../';
-import { useContext } from 'react';
-import styles from './DropdownStatus.module.css';
 import classNames from 'classnames';
 
-export const DropdownStatusContainer = ({ className }) => {
-  const { ORDER_STATUSES, onChangeStatusChoose, onStatusChange, statuses } =
-    useContext(FilterContext);
+import { Dropdown, Icon, Input, Checkbox } from 'src/shared/components';
+import styles from './DropdownStatus.module.css';
+import { ORDER_STATUSES } from '../../lib/orderStatus';
 
-  const dropdownClass = classNames(styles._, className);
-  let selectedStatuses = Object.keys(statuses).filter((e) => statuses[e]);
-  if (
-    selectedStatuses.length === 0 ||
-    selectedStatuses.length === Object.keys(statuses).length
-  ) {
-    selectedStatuses = 'Любой';
-  } else {
-    let res = '';
-    for (let i = 0; i < selectedStatuses.length; ++i) {
-      res += ORDER_STATUSES[selectedStatuses[i]] + ' ';
-    }
-    selectedStatuses = res;
-  }
-  return (
-    <DropdownStatus
-      dropdownClass={dropdownClass}
-      onChangeStatusChoose={onChangeStatusChoose}
-      onStatusChange={onStatusChange}
-      selectedStatuses={selectedStatuses}
-      statuses={statuses}
-      ORDER_STATUSES={ORDER_STATUSES}
-    />
-  );
+const getRuSelectedStatuses = (statuses) => {
+  return statuses.length === 0 ||
+    statuses.length === Object.keys(ORDER_STATUSES).length
+    ? 'Любой'
+    : statuses.map((e) => ' ' + ORDER_STATUSES[e]);
 };
 
-const DropdownStatus = ({
-  dropdownClass,
-  onChangeStatusChoose,
-  onStatusChange,
-  selectedStatuses,
-  statuses,
-  ORDER_STATUSES,
-}) => {
+export const DropdownStatus = ({ className, onStatusChange, statuses }) => {
+  const selectedStatuses = getRuSelectedStatuses(statuses);
   return (
     <Dropdown
-      className={dropdownClass}
+      className={classNames(styles._, className)}
       trigger={
         <Input
-          type='button'
+          readOnly
           labelText='Статус заказа'
           postfix={
             <Icon iconName={'vArrow'} className={styles.iconInputPostfix} />
@@ -60,9 +31,8 @@ const DropdownStatus = ({
           <Checkbox
             onChange={() => {
               onStatusChange(key);
-              onChangeStatusChoose(value);
             }}
-            checked={statuses[key]}
+            checked={statuses.includes(key)}
           />
           <span>{value}</span>
         </label>
