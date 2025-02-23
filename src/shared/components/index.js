@@ -11,3 +11,4 @@ export * from './Table/TableHeaderCell/TableHeaderCell';
 export * from './Table/TableRow/TableRow';
 export * from './Table/TableBody/TableBody';
 export * from './Table/TableFooter/TableFooter';
+export * from './Radio/Radio';

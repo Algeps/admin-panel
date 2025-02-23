@@ -19,6 +19,8 @@ import {
   TableRow,
 } from 'src/shared/components';
 
+const noop = () => {};
+
 const sortColumns = {
   date: 'date',
   status: 'status',
@@ -26,10 +28,18 @@ const sortColumns = {
   sum: 'sum',
 };
 
-export const OrderTableHeader = () => {
+export const OrderTableHeader = ({
+  isAllRowsSelected = false,
+  onSelectedRows = noop,
+  onSelectedRowsReset = noop,
+}) => {
   const sortColumn = useSelector(getSortColumn);
   const direction = useSelector(getDirection);
   const dispatch = useDispatch();
+
+  const handleChecked = ({ target: { checked } }) => {
+    return checked ? onSelectedRows() : onSelectedRowsReset();
+  };
 
   const handleSortColumn = (column) => {
     sortColumn === column
@@ -40,7 +50,7 @@ export const OrderTableHeader = () => {
     <TableHeader>
       <TableRow>
         <TableCell className={stylesRow.headerCell}>
-          <Checkbox />
+          <Checkbox onChange={handleChecked} checked={isAllRowsSelected} />
         </TableCell>
 
         <TableCell className={classNames(stylesRow.headerCell, stylesRow.id)}>

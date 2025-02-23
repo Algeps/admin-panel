@@ -34,7 +34,11 @@ export const DropdownStatus = ({ className, onStatusChange, statuses }) => {
             }}
             checked={statuses.includes(key)}
           />
-          <span>{value}</span>
+          <span
+            className={classNames({ [styles.overlayItemText]: statuses[key] })}
+          >
+            {value}
+          </span>
         </label>
       ))}
       childrenClassNames={{ overlay: styles.overlay }}
